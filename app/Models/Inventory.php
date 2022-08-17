@@ -5,25 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Player extends Model
+class Inventory extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'level',
-        'health',
-        'force',
-        'intelligence',
-        'agility',
+        'key',
+        'slots',
+        'equippable',
+        'player_id',
         'map_field_id',
     ];
+
+    protected $with = ['items'];
 
     public function mapField(){
         return $this->belongsTo(MapField::class);
     }
 
-    public function inventories(){
-        return $this->hasMany(Inventory::class);
+    public function items(){
+        return $this->belongsToMany(Item::class)
+            ->using(InventoryItem::class);
     }
 }

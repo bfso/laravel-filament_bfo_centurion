@@ -14,16 +14,16 @@ class TakeAction extends BaseAction {
             ->mapField;
         $items = $mapField->items;
         $item = $items->where('key',$this->command->subject)->first();
-        if($item){
+        $inventory = $this->command->player->inventories->first();
+        if($item and $inventory){
             (new InventoryItem([
                 'item_id' => $item->id,
-                'position-x' => 1,
-                'position-y' => 1,
+                'inventory_id' => $inventory->id,
             ]))->save();
             $mapField->items()->detach($item->id);
             return new ActionResult(
                 true,
-                "The " . $this->command->subject . " is now in your bag"
+                "The " . $this->command->subject . " is taken"
             );
         }
         return new ActionResult(

@@ -13,4 +13,8 @@ class CmdController extends CommandController {
         return $this->do('go ' . $request->direction);
     }
 
+    public function take(Request $request) {
+        return $this->do('take ' . $request->item);
+    }
+
 }

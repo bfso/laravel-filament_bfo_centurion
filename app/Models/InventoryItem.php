@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class InventoryItem extends Model
+class InventoryItem extends Pivot
 {
     use HasFactory;
     protected $fillable = [
         'item_id',
-        'position-x',
-        'position-y',
+        'inventory_id',
     ];
 
     public function item(){

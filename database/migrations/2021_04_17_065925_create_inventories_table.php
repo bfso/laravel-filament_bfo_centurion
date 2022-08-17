@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInventoryItemsTable extends Migration
+class CreateInventoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateInventoryItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('inventory_items', function (Blueprint $table) {
+        Schema::create('inventories', function (Blueprint $table) {
             $table->id();
-            //$table->string('key');
-            $table->integer('position-x');
-            $table->integer('position-y');
-            //$table->foreignId('inventory_id')->constrained();
-            $table->foreignId('item_id')->constrained();
+            $table->string('key');
+            $table->integer('slots');
+            $table->boolean('equippable')->default( true);
+            $table->foreignId('player_id')->constrained();
+            $table->foreignId('map_field_id')->nullable()->constrained();
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateInventoryItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inventory_items');
+        Schema::dropIfExists('inventories');
     }
 }

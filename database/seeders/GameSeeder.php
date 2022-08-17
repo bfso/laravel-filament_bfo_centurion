@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Inventory;
 use App\Models\Item;
 use App\Models\MapField;
 use App\Models\MapFieldItem;
@@ -84,5 +85,9 @@ class GameSeeder extends Seeder
                 ],
             ))
             ->create();
+
+        // Inventories
+        Inventory::factory()->create(['player_id' => 1]);
+        Inventory::factory()->create(['player_id' => 2]);
     }
 }

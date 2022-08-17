@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CmdController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\InventoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,10 +19,14 @@ use Illuminate\Support\Facades\Route;
 Route::post('v1/login', [AuthController::class, 'signin']);
 //Route::post('register', [AuthController::class, 'signup']);
 
-Route::middleware('auth:sanctum')->group(function() {
+Route::middleware(['auth:sanctum','throttle:60,1'])->group(function() {
     Route::prefix('v1')->group(function() {
-        Route::get('/look', [CmdController::class, 'look']);
-        Route::get('/go', [CmdController::class, 'go']);
+        Route::get('look', [CmdController::class, 'look']);
+        Route::get('go', [CmdController::class, 'go']);
+        Route::get('take', [CmdController::class, 'take']);
+        Route::prefix('inventories')->group(function() {
+            Route::get('/', [InventoryController::class, 'show']);
+        });
     });
 });
 
