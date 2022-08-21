@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Domain\Game\Factories\ActionFactory;
 use App\Game\Cmd\Command;
-use App\Game\Factories\ActionFactory;
 use App\Models\Player;
 use App\Http\Controllers\Controller as Controller;
 use Illuminate\Http\JsonResponse;

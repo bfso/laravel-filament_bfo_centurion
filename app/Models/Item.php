@@ -19,6 +19,7 @@ class Item extends Model {
         'eatable',
         'claimable',
         'equippable',
+        'image_path',
         'restores_health_by',
     ];
 

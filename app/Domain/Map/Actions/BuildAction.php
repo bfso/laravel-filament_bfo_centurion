@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Game\Actions;
+namespace App\Domain\Map\Actions;
 
+use App\Domain\Game\Actions\ActionResult;
+use App\Domain\Game\Actions\BaseAction;
 use App\Jobs\Build;
 
 class BuildAction extends BaseAction {

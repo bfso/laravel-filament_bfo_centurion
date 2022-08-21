@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Game\Actions;
+namespace App\Domain\Game\Actions;
 
 class ActionResult {
     public $success = false;

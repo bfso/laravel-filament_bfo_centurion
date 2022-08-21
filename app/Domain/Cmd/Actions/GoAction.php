@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Game\Actions;
+namespace App\Domain\Cmd\Actions;
 
-use App\Game\Map\Position;
+use App\Domain\Game\Actions\ActionResult;
+use App\Domain\Game\Actions\BaseAction;
+use App\Domain\Map\Position;
 use App\Models\MapField;
 
 class GoAction extends BaseAction {

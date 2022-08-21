@@ -25,6 +25,7 @@ class Inventory extends Model
 
     public function items(){
         return $this->belongsToMany(Item::class)
-            ->using(InventoryItem::class);
+            ->using(InventoryItem::class)
+            ->withPivot('id');
     }
 }

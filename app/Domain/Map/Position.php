@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Game\Map;
+namespace App\Domain\Map;
 
 class Position {
     public $x = null;

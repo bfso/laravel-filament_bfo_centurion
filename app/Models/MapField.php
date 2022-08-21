@@ -16,7 +16,9 @@ class MapField extends Model
     ];
 
     public function items(){
-        return $this->belongsToMany(Item::class,'map_field_items');
+        return $this->belongsToMany(Item::class,'map_field_items')
+            ->using(MapFieldItem::class)
+            ->withPivot('id');
     }
 
     public function players(){

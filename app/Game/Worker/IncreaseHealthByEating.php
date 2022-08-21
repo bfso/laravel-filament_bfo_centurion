@@ -2,7 +2,8 @@
 
 namespace App\Game\Worker;
 
-use App\Game\Actions\ActionResult;
+
+use App\Domain\Game\Actions\ActionResult;
 
 class IncreaseHealthByEating {
     public static function handle($inventoryItem, $command) {

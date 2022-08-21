@@ -6,16 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class InventoryItem extends Pivot
+class PlayerQuest extends Pivot
 {
     use HasFactory;
-    protected $fillable = [
-        'id',
-        'item_id',
-        'inventory_id',
-    ];
 
-    public function item(){
-        return $this->belongsTo(Item::class);
-    }
+    //protected $table = 'player_quest';
+
+    protected $fillable = [
+        'is_started',
+        'is_successful',
+        'is_failed',
+        'player_id',
+        'quest_id',
+    ];
 }

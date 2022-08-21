@@ -27,6 +27,7 @@ class CreateItemsTable extends Migration
             $table->boolean('eatable')->default(false);
             $table->boolean('claimable')->default(false);
             $table->boolean('equippable')->default(false);
+            $table->boolean('image_path')->nullable()->default(null);
             $table->unsignedInteger('level')->default(1);
             $table->unsignedInteger('claim_resistance')->default(0);
             $table->unsignedInteger('restores_health_by')->default(0);

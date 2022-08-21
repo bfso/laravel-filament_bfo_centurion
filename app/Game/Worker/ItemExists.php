@@ -2,7 +2,7 @@
 
 namespace App\Game\Worker;
 
-use App\Game\Actions\ActionResult;
+use App\Domain\Game\Actions\ActionResult;
 use App\Game\Cmd\Command;
 use App\Models\Item;
 

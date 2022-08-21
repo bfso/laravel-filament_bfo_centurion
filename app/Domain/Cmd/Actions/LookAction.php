@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Game\Actions;
+namespace App\Domain\Cmd\Actions;
 
-use App\Models\MapField;
+use App\Domain\Game\Actions\ActionResult;
+use App\Domain\Game\Actions\BaseAction;
 
 class LookAction extends BaseAction {
 

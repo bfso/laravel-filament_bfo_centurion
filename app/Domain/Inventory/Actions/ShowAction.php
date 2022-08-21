@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Game\Actions;
+namespace App\Domain\Inventory\Actions;
 
+use App\Domain\Game\Actions\ActionResult;
+use App\Domain\Game\Actions\BaseAction;
 use App\Models\Inventory;
 use App\Models\Player;
 
