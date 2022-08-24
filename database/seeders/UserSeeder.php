@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Domain\Column\ColumnPreFiller;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Arr;
@@ -37,9 +36,15 @@ class UserSeeder extends Seeder
         ]);
 
         $user = User::create([
-            'email' => 'maximilian.salzgeber@lernende.bfo-vs.ch',
-            'name' => 'pedro',
-            'password' => Hash::make('maximilian.salzgeber@lernende.bfo-vs.ch'),
+            'email' => 'luka.stanisic@lernende.bfo-vs.ch',
+            'name' => 'luka',
+            'password' => Hash::make('luka.stanisic@lernende.bfo-vs.ch'),
+        ]);
+
+        $user = User::create([
+            'email' => 'giacomo.piperata@lernende.bfo-vs.ch',
+            'name' => 'giacomo',
+            'password' => Hash::make('giacomo.piperata@lernende.bfo-vs.ch'),
         ]);
 
     }
