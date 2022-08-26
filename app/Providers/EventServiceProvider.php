@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Domain\Inventory\Events\CraftingFinished;
+use App\Domain\Inventory\Listeners\ResolveCraftingQuests;
+use App\Domain\Inventory\Listeners\ShowCraftingFinishedMessage;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -18,6 +20,10 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        CraftingFinished::class => [
+            ShowCraftingFinishedMessage::class,
+            ResolveCraftingQuests::class,
+        ]
     ];
 
     /**

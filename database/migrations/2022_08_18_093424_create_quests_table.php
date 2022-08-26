@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->id();
             $table->string('quest');
             $table->boolean('is_active')->default(false);
+            $table->integer('experience')->default(0);
             $table->timestamps();
         });
     }

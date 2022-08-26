@@ -12,6 +12,7 @@ class Player extends Model {
         'name',
         'level',
         'health',
+        'experience',
         'force',
         'intelligence',
         'agility',

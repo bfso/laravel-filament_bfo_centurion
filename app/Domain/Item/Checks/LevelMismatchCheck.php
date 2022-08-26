@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Game\Worker;
+namespace App\Domain\Item\Checks;
 
-use App\Game\Actions\ActionResult;
+use App\Domain\Game\Actions\ActionResult;
 
-class LevelMismatch {
+class LevelMismatchCheck {
     public static function handle($item, $command) {
         if ($item->level > $command->player->level) {
             return new ActionResult(

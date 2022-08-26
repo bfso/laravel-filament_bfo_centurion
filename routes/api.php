@@ -28,6 +28,8 @@ Route::middleware(['auth:sanctum','throttle:60,1'])->group(function() {
         Route::prefix('inventories')->group(function() {
             Route::get('/', [InventoryController::class, 'show']);
             Route::get('/discard', [InventoryController::class, 'discard']);
+            Route::get('/eat', [InventoryController::class, 'eat']);
+            Route::post('/craft', [InventoryController::class, 'craft']);
         });
         Route::prefix('quests')->group(function() {
             Route::get('/resolve', [QuestController::class, 'resolve']);

@@ -27,7 +27,7 @@ class ItemFactory extends Factory
             'key' => Str::slug($title),
             'title' => $title,
             'description' => $this->faker->text,
-            'restores_health_by' => $this->faker->randomNumber(2),
+            'restores_health_by' => 0,
         ];
     }
 }

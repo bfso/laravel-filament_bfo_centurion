@@ -21,19 +21,19 @@ class GameSeeder extends Seeder {
     public function run() {
         // Items
         $wood = Item::factory()->create(['key' => 'wood', 'takeable' => true]);
-        $reed = Item::factory()->create(['key' => 'reed', 'takeable' => true]);
-        $farm = Item::factory()->create(['key' => 'map', 'craftable' => true]);
-        $farm->blueprints()->attach($wood);
-        $farm->blueprints()->attach($reed);
+        $stick = Item::factory()->create(['key' => 'stick', 'takeable' => true]);
+        $stone = Item::factory()->create(['key' => 'stone', 'takeable' => true]);
+        $spear = Item::factory()->create(['key' => 'spear', 'craftable' => true]);
+        $spear->blueprints()->attach($stick);
+        $spear->blueprints()->attach($stone);
 
-        $waypoint = Item::factory()->create(['key' => 'waypoint', 'buildable' => true, 'level' => 2]);
-        $waypoint->blueprints()->attach($wood);
+        //$waypoint = Item::factory()->create(['key' => 'waypoint', 'buildable' => true, 'level' => 2]);
+        //$waypoint->blueprints()->attach($wood);
 
-        Item::factory(3)
+        Item::factory(2)
             ->state(new Sequence(
                 ['key' => 'tree'],
-                ['key' => 'apple', 'eatable' => true, 'takeable' => true],
-                ['key' => 'map', 'craftable' => true],
+                ['key' => 'apple', 'eatable' => true, 'takeable' => true, 'restores_health_by' => 2],
             ))
             ->create();
 

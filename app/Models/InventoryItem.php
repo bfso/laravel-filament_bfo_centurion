@@ -18,4 +18,8 @@ class InventoryItem extends Pivot
     public function item(){
         return $this->belongsTo(Item::class);
     }
+
+    public function inventory(){
+        return $this->belongsTo(Inventory::class);
+    }
 }

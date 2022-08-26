@@ -4,7 +4,7 @@ namespace App\Jobs;
 
 use App\Events\CraftingFinished;
 use App\Game\Worker\CreateNewMapFieldItem;
-use App\Game\Worker\LevelMismatch;
+use App\Game\Worker\LevelMismatchCheck;
 use App\Game\Worker\ItemExists;
 use App\Game\Worker\RemoveInventoryItemsWhenAllExist;
 
@@ -22,7 +22,7 @@ class Build extends Craft {
                 return ItemExists::handle($this->item, $this->command);
             },
             function() {
-                return LevelMismatch::handle($this->item, $this->command);
+                return LevelMismatchCheck::handle($this->item, $this->command);
             },
             function() {
                 return RemoveInventoryItemsWhenAllExist::handle($this->item, $this->command);

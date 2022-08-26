@@ -11,6 +11,7 @@ class Quest extends Model
     protected $fillable = [
         'is_active',
         'quest',
+        'experience',
     ];
 
     public function players() {
