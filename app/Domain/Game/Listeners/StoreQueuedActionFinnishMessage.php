@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Domain\Inventory\Listeners;
+namespace App\Domain\Game\Listeners;
 
 use App\Domain\Inventory\Events\CraftingFinished;
 use App\Models\EventMessage;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Support\Facades\Log;
 
-class ShowCraftingFinishedMessage
+class StoreQueuedActionFinnishMessage
 {
     /**
      * Create the event listener.
@@ -29,7 +26,11 @@ class ShowCraftingFinishedMessage
     public function handle(CraftingFinished $event)
     {
         $eventMessage = new EventMessage([
-            'message' => $event->actionResult->message . " → " . now()
+            'is_successful' => $event->actionResult->success,
+            'message' => $event->actionResult->message,
+            'key' => $event->actionResult->key,
+            'data' => $event->actionResult->data,
+            'player_id' => $event->player->id,
         ]);
         $eventMessage->save();
     }

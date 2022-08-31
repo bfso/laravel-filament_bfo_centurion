@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Domain\Map\Position;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,5 +24,13 @@ class MapField extends Model
 
     public function players(){
         return $this->hasMany(Player::class);
+    }
+
+    public function position(){
+        return new Position(
+            $this->x,
+            $this->y,
+            $this->z,
+        );
     }
 }

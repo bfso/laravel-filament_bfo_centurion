@@ -16,13 +16,15 @@ trait Resolveable {
         if (!$this->isQuestOpen()) {
             return new ActionResult(
                 false,
-                'The quest is not open'
+                'The quest is not open',
+                "quest-not-open"
             );
         }
         if (!$this->isConditionMet()) {
             return new ActionResult(
                 false,
                 'The quests conditions are not met',
+                "quest-conditions-not-met",
                 [
                     'description' => $this->description()
                 ]
@@ -35,6 +37,7 @@ trait Resolveable {
         return new ActionResult(
             true,
             'Quest successfully resolved',
+            "quest-resolved",
             [
                 'reward_text' => $this->rewardText()
             ]

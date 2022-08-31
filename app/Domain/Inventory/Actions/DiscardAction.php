@@ -17,28 +17,30 @@ use App\Models\Player;
 class DiscardAction extends BaseAction {
 
     public function do() {
-        ///** @var Player $player */
-        //$player = $this
-        //    ->command
-        //    ->player;
-        //
-        //$inventoryItem = InventoryItem::with('item')->whereHas('item', function ($query) {
-        //    return $query->where('key', $this->command->subject);
-        //})->first();
-        //
-        //if ($inventoryItem) {
-        //    $inventoryItem->delete();
-        //    return new ActionResult(
-        //        true,
-        //        "The following item has been discarded:",
-        //        [
-        //            'items' => $inventoryItem
-        //        ]
-        //    );
-        //}
+        /** @var Player $player */
+        $player = $this
+            ->command
+            ->player;
+
+        $inventoryItem = InventoryItem::with('item')->whereHas('item', function($query) {
+            return $query->where('key', $this->command->subject);
+        })->where('player_id', $player->id)->first();
+
+        if ($inventoryItem) {
+            $inventoryItem->delete();
+            return new ActionResult(
+                true,
+                "The following item has been discarded:",
+                'item-discarded',
+                [
+                    'item' => $inventoryItem
+                ]
+            );
+        }
         return new ActionResult(
             false,
-            "Not yet implemented."
+            "The item can not be found.",
+            "item-not-found"
         );
     }
 }

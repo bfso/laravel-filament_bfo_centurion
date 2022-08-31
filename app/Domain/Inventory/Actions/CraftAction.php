@@ -21,7 +21,12 @@ class CraftAction extends BaseAction {
         //$emailJob = (new SendEmailJob())->delay(Carbon::now()->addSeconds(3));
         return new ActionResult(
             true,
-            $this->command->subject . " crafting started - " . now()
+            $this->command->subject . " crafting started",
+            "crafting-started",
+            [
+                'created_at' => now(),
+                'item_key' => $this->command->subject
+            ]
         );
     }
 }

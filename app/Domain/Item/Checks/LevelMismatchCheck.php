@@ -9,9 +9,14 @@ class LevelMismatchCheck {
         if ($item->level > $command->player->level) {
             return new ActionResult(
                 false,
-                "You need to reach level " . $item->level . " to do that."
+                "You need to reach level " . $item->level . " to do that.",
+                "level-mismatch"
             );
         }
-        return new ActionResult(true, "");
+        return new ActionResult(
+            true,
+            "",
+            "level-okay"
+        );
     }
 }

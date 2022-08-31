@@ -36,7 +36,10 @@ class ResolveQuestsAction extends BaseAction {
         return new ActionResult(
             false,
             "No quest resolver found.",
-            $class
+            "no-quest-resolver-found",
+            [
+                "key" => $this->command->subject
+            ]
         );
     }
 }

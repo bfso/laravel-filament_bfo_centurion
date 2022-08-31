@@ -20,20 +20,30 @@ class GameSeeder extends Seeder {
      */
     public function run() {
         // Items
-        $wood = Item::factory()->create(['key' => 'wood', 'takeable' => true]);
-        $stick = Item::factory()->create(['key' => 'stick', 'takeable' => true]);
-        $stone = Item::factory()->create(['key' => 'stone', 'takeable' => true]);
+        $wood = Item::factory()->create(['key' => 'wood', 'takeable' => true, 'is_seeded' => true]);
+        $stick = Item::factory()->create(['key' => 'stick', 'takeable' => true, 'is_seeded' => true]);
+        $stone = Item::factory()->create(['key' => 'stone', 'takeable' => true, 'is_seeded' => true]);
+        $sharpStone = Item::factory()->create(['key' => 'sharp-stone', 'takeable' => true]);
         $spear = Item::factory()->create(['key' => 'spear', 'craftable' => true]);
+        $beeHive = Item::factory()->create(['key' => 'bee-hive', 'interactable' => true, 'is_seeded' => true]);
+        $wax = Item::factory()->create(['key' => 'wax', 'takeable' => true]);
+        $honey = Item::factory()->create(['key' => 'honey', 'eatable' => true, 'takeable' => true, 'restores_health_by' => 5]);
+
+        // Spear blueprint
         $spear->blueprints()->attach($stick);
-        $spear->blueprints()->attach($stone);
+        $spear->blueprints()->attach($sharpStone);
+
+        // BeeHive interaction
+        $beeHive->blueprints()->attach($wax);
+        $beeHive->blueprints()->attach($honey);
 
         //$waypoint = Item::factory()->create(['key' => 'waypoint', 'buildable' => true, 'level' => 2]);
         //$waypoint->blueprints()->attach($wood);
 
         Item::factory(2)
             ->state(new Sequence(
-                ['key' => 'tree'],
-                ['key' => 'apple', 'eatable' => true, 'takeable' => true, 'restores_health_by' => 2],
+                ['key' => 'tree', 'is_seeded' => true],
+                ['key' => 'apple', 'eatable' => true, 'takeable' => true, 'restores_health_by' => 2, 'is_seeded' => true],
             ))
             ->create();
 
@@ -50,15 +60,21 @@ class GameSeeder extends Seeder {
                     ->state(new Sequence(
                         [
                             'map_field_id' => $mapField->id,
-                            'item_id' => Item::where('takeable', true)->inRandomOrder()->first(),
+                            'item_id' => Item::where('is_seeded', true)
+                                ->inRandomOrder()
+                                ->first(),
                         ],
                         [
                             'map_field_id' => $mapField->id,
-                            'item_id' => Item::where('takeable', true)->inRandomOrder()->first(),
+                            'item_id' => Item::where('is_seeded', true)
+                                ->inRandomOrder()
+                                ->first(),
                         ],
                         [
                             'map_field_id' => $mapField->id,
-                            'item_id' => Item::where('takeable', true)->inRandomOrder()->first(),
+                            'item_id' => Item::where('is_seeded', true)
+                                ->inRandomOrder()
+                                ->first(),
                         ],
                     ))
                     ->create();

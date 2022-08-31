@@ -26,14 +26,16 @@ class ShowAction extends BaseAction {
             return new ActionResult(
                 true,
                 "You have the following inventories:",
+                "player-list-of-inventories",
                 [
                     'inventories' => $player->inventories
                 ]
             );
         }
         return new ActionResult(
-            true,
-            "No inventories found."
+            false,
+            "No inventories found.",
+            "player-has-no-inventory"
         );
     }
 }

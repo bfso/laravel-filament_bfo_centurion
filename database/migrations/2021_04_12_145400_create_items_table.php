@@ -28,6 +28,7 @@ class CreateItemsTable extends Migration
             $table->boolean('claimable')->default(false);
             $table->boolean('interactable')->default(false);
             $table->boolean('equippable')->default(false);
+            $table->boolean('is_seeded')->default(false);
             $table->boolean('image_path')->nullable()->default(null);
             $table->unsignedInteger('level')->default(1);
             $table->unsignedInteger('claim_resistance')->default(0);

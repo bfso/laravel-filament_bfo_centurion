@@ -18,12 +18,14 @@ class LookAction extends BaseAction {
             return new ActionResult(
                 true,
                 "There are things to see:",
+                "visible-on-map-field",
                 ['items' => $items]
             );
         }
         return new ActionResult(
             true,
-            "There is not much to speak of."
+            "There is not much to speak of.",
+            "nothing-visible-on-map-field"
         );
     }
 }

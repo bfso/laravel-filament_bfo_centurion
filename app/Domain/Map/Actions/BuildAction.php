@@ -12,7 +12,8 @@ class BuildAction extends BaseAction {
             ->delay(2);
         return new ActionResult(
             true,
-            $this->command->subject . " building started - " . now()
+            $this->command->subject . " building started - " . now(),
+            "building-started"
         );
     }
 }

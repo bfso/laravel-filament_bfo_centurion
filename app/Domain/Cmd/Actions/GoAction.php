@@ -14,99 +14,66 @@ class GoAction extends BaseAction {
         $position = new Position($player->mapField->x, $player->mapField->y);
 
         if ($this->command->subject == "left") {
-            return $this->goLeft($player, $position);
+            return $this->goLeft($position);
         }
         if ($this->command->subject == "right") {
-            return $this->goRight($player, $position);
+            return $this->goRight($position);
         }
         if ($this->command->subject == "up") {
-            return $this->goUp($player, $position);
+            return $this->goUp($position);
         }
         if ($this->command->subject == "down") {
-            return $this->goDown($player, $position);
+            return $this->goDown($position);
         }
         return $this->cantGoThereActionResult();
+    }
+
+    protected function goRight($position) {
+        $newX = $position->x + 1;
+        $newMapField = MapField::where('x', $newX)->where('y', $position->y)->first();
+        return $this->goToMapField($newMapField);
+    }
+
+    protected function goLeft($position) {
+        $newX = $position->x - 1;
+        $newMapField = MapField::where('x', $newX)->where('y', $position->y)->first();
+        return $this->goToMapField($newMapField);
+    }
+
+    protected function goUp($position) {
+        $newY = $position->y - 1;
+        $newMapField = MapField::where('x', $position->x)->where('y', $newY)->first();
+        return $this->goToMapField($newMapField);
+    }
+
+    protected function goDown($position) {
+        $newY = $position->y + 1;
+        $newMapField = MapField::where('x', $position->x)->where('y', $newY)->first();
+        return $this->goToMapField($newMapField);
+    }
+
+    public function goToMapField($newMapField) {
+        if (!$newMapField) {
+            return $this->cantGoThereActionResult();
+        }
+        $this->command->player->map_field_id = $newMapField->id;
+        $this->command->player->save();
+
+        return new ActionResult(
+            true,
+            "I went " . $this->command->subject,
+            "player-new-position",
+            [
+                'position' => $newMapField->position(),
+            ]
+        );
     }
 
     public function cantGoThereActionResult() {
         return new ActionResult(
             false,
-            "I can't go there"
-        );
-    }
-
-    public function goRight($player, $position) {
-        $newX = $position->x + 1;
-        $newMapField = MapField::where('x', $newX)->where('y', $position->y)->first();
-        if (!$newMapField) {
-            return $this->cantGoThereActionResult();
-        }
-        $player->map_field_id = $newMapField->id;
-        $player->save();
-        return new ActionResult(
-            true,
-            "I went right",
-            [
-                'x' => $newMapField->x,
-                'y' => $newMapField->y,
-            ]
-        );
-    }
-
-    public function goLeft($player, $position) {
-        if ($position->x == 1) {
-            return $this->cantGoThereActionResult();
-        }
-        $newX = $position->x - 1;
-        $newMapField = MapField::where('x', $newX)->where('y', $position->y)->first();
-        if (!$newMapField) {
-            return $this->cantGoThereActionResult();
-        }
-        $player->map_field_id = $newMapField->id;
-        $player->save();
-        return new ActionResult(
-            true,
-            "I went left",
-            [
-                'x' => $newMapField->x,
-                'y' => $newMapField->y,
-            ]
-        );
-    }
-
-    public function goUp($player, $position) {
-        $newY = $position->y - 1;
-        $newMapField = MapField::where('x', $position->x)->where('y', $newY)->first();
-        if (!$newMapField) {
-            return $this->cantGoThereActionResult();
-        }
-        $player->map_field_id = $newMapField->id;
-        $player->save();
-        return new ActionResult(
-            true,
-            "I went up",
-            [
-                'x' => $newMapField->x,
-                'y' => $newMapField->y,
-            ]
-        );
-    }
-
-    public function goDown($player, $position) {
-        $newY = $position->y + 1;
-        $newMapField = MapField::where('x', $position->x)->where('y', $newY)->first();
-        if (!$newMapField) {
-            return $this->cantGoThereActionResult();
-        }
-        $player->map_field_id = $newMapField->id;
-        $player->save();
-        return new ActionResult(
-            true,
-            "I went down",
-            [
-                'x' => $newMapField->x,
-                'y' => $newMapField->y,
-            ]
+            "I can't go there",
+            "new-position-not-possible"
         );
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Domain\Inventory\Events;
 
 use App\Domain\Game\Actions\ActionResult;
+use App\Models\Player;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -18,12 +19,19 @@ class CraftingFinished {
     public ActionResult $actionResult;
 
     /**
-     * Create a new event instance.
+     * @var Player $player
+     */
+    public Player $player;
+
+    /**
+     * CraftingFinished constructor.
      *
      * @param ActionResult $actionResult
+     * @param Player $player
      */
-    public function __construct(ActionResult $actionResult) {
+    public function __construct(ActionResult $actionResult, Player $player) {
         $this->actionResult = $actionResult;
+        $this->player = $player;
     }
 
     /**

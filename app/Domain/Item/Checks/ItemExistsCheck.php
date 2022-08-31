@@ -16,12 +16,14 @@ class ItemExistsCheck {
         if (!$item) {
             return new ActionResult(
                 false,
-                "I don't know how to " . $command->action . " a " . $command->subject
+                "I don't know how to " . $command->action . " a " . $command->subject,
+                "item-does-not-exist"
             );
         }
         return new ActionResult(
             true,
-            "I know how to " . $command->action . " a " . $command->subject
+            "I know how to " . $command->action . " a " . $command->subject,
+            "item-exists"
         );
     }
 }

@@ -20,7 +20,8 @@ class RemoveInventoryItemsWhenAllExist {
             if (!in_array($blueprintItem->key, $command->data['with'])) {
                 return new ActionResult(
                     false,
-                    $command->action . "ing of " . $command->subject . " not possible since the ingredients are not correct"
+                    $command->action . "ing of " . $command->subject . " not possible since the ingredients are not correct",
+                    "ingredients-mismatch"
                 );
             }
 
@@ -36,7 +37,8 @@ class RemoveInventoryItemsWhenAllExist {
             if ($inventoryItems->count() < $blueprintItem->pivot->count) {
                 return new ActionResult(
                     false,
-                    $command->action . "ing of " . $command->subject . " not possible since " . $blueprintItem->key . " is missing"
+                    $command->action . "ing of " . $command->subject . " not possible since " . $blueprintItem->key . " is missing",
+                    "ingredients-missing"
                 );
             }
             $itemsToRemove = $itemsToRemove->merge($inventoryItems);
@@ -45,7 +47,8 @@ class RemoveInventoryItemsWhenAllExist {
         InventoryItem::destroy($itemsToRemove->pluck('id'));
         return new ActionResult(
             true,
-            "Items successfully removed from inventory"
+            "Items successfully removed from inventory",
+            "items-removal-successful"
         );
     }
 }

@@ -5,6 +5,7 @@ namespace App\Domain\Game\Factories;
 use App\Domain\Cmd\Actions\GoAction;
 use App\Domain\Cmd\Actions\LookAction;
 use App\Domain\Cmd\Actions\TakeAction;
+use App\Domain\EventMessages\Actions\ShowEventMessagesAction;
 use App\Domain\Game\Actions\NoAction;
 use App\Domain\Inventory\Actions\CraftAction;
 use App\Domain\Inventory\Actions\EatAction;
@@ -47,6 +48,9 @@ class ActionFactory {
         }
         if ($command->action == "resolve-quests") {
             return new ResolveQuestsAction($command);
+        }
+        if ($command->action == "show-event-messages") {
+            return new ShowEventMessagesAction($command);
         }
 
         return new NoAction($command);

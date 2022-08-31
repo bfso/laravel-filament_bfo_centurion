@@ -2,7 +2,6 @@
 
 namespace App\Domain\Inventory\Reactions;
 
-
 use App\Domain\Game\Actions\ActionResult;
 use App\Models\InventoryItem;
 
@@ -16,10 +15,11 @@ class IncreaseHealthByEating {
                 return $query->where('key', $item->key);
             })->first();
 
-        if(!$inventoryItem){
+        if (!$inventoryItem) {
             return new ActionResult(
                 false,
-                "It's not possible to restore your health, since the item doesn't exist in your inventory"
+                "It's not possible to restore your health, since the item doesn't exist in your inventory",
+                "item-not-in-inventory"
             );
         }
 
@@ -29,7 +29,8 @@ class IncreaseHealthByEating {
         $inventoryItem->delete();
         return new ActionResult(
             true,
-            "Your health is restored"
+            "Your health is restored",
+            "health-restored"
         );
     }
 }

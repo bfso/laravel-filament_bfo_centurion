@@ -22,21 +22,32 @@ class TakeAction extends BaseAction {
         if ($availableSlots < 1) {
             return new ActionResult(
                 false,
-                "Can't take that, not enough space."
+                "Can't take that, not enough space.",
+                "not-enough-inventory-space"
             );
         }
 
         if (!$item) {
             return new ActionResult(
                 false,
-                "Can't take that, no item found."
+                "Can't take that, no item found.",
+                "no-item-found"
+            );
+        }
+
+        if (!$item->takeable) {
+            return new ActionResult(
+                false,
+                "Not able to take that item.",
+                "item-is-not-takeable"
             );
         }
 
         if (!$inventory) {
             return new ActionResult(
                 false,
-                "Can't take that, no inventory found."
+                "Can't take that, no inventory found.",
+                'player-has-no-inventory'
             );
         }
 
@@ -49,7 +60,8 @@ class TakeAction extends BaseAction {
         //$mapField->items()->detach($item->id);
         return new ActionResult(
             true,
-            "The " . $this->command->subject . " is taken"
+            "The " . $this->command->subject . " is taken",
+            'item-is-taken'
         );
     }
 }

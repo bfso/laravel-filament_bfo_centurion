@@ -7,7 +7,8 @@ class NoAction extends BaseAction  {
     public function do() {
         return new ActionResult(
             false,
-            "This action doesn't exist"
+            "This action doesn't exist",
+            "action-does-not-exist"
         );
     }
 }

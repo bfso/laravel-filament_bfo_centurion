@@ -22,6 +22,7 @@ class Item extends Model {
         'equippable',
         'image_path',
         'restores_health_by',
+        'is_seeded',
     ];
 
     public function blueprints(){

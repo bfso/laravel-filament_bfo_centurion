@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CmdController;
+use App\Http\Controllers\Api\EventMessageController;
 use App\Http\Controllers\Api\InventoryController;
 use App\Http\Controllers\Api\QuestController;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,9 @@ Route::middleware(['auth:sanctum','throttle:60,1'])->group(function() {
         Route::prefix('quests')->group(function() {
             Route::get('/resolve', [QuestController::class, 'resolve']);
             Route::get('/', [QuestController::class, 'index']);
+        });
+        Route::prefix('event-messages')->group(function() {
+            Route::get('/', [EventMessageController::class, 'index']);
         });
     });
 });

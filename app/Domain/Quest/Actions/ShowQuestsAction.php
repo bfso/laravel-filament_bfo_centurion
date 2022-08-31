@@ -24,7 +24,7 @@ class ShowQuestsAction extends BaseAction {
             ->player;
         $quests = ($player->with('quests')->where('id', $player->id)->first())->quests;
 
-        $quests->map(function($quest){
+        $quests->map(function($quest) {
             $questResolver = new $quest->quest();
             $quest->key = $questResolver->key();
             $quest->description = $questResolver->description();
@@ -36,6 +36,7 @@ class ShowQuestsAction extends BaseAction {
             return new ActionResult(
                 true,
                 "You have the following quests:",
+                "player-quest-list",
                 [
                     'quests' => $quests
                 ]
@@ -43,7 +44,8 @@ class ShowQuestsAction extends BaseAction {
         }
         return new ActionResult(
             true,
-            "No quests found."
+            "No quests found.",
+            "no-player-quests"
         );
     }
 
