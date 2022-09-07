@@ -26,6 +26,7 @@ Route::middleware(['auth:sanctum','throttle:60,1'])->group(function() {
         Route::get('look', [CmdController::class, 'look']);
         Route::get('go', [CmdController::class, 'go']);
         Route::get('take', [CmdController::class, 'take']);
+        Route::post('interact', [CmdController::class, 'interact']);
         Route::prefix('inventories')->group(function() {
             Route::get('/', [InventoryController::class, 'show']);
             Route::get('/discard', [InventoryController::class, 'discard']);

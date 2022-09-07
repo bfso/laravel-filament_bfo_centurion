@@ -31,4 +31,14 @@ class CmdController extends CommandController {
             )
         );
     }
+
+    public function interact(Request $request) {
+        return $this->sendResponse(
+            new Command(
+                'interact',
+                $request->with,
+                $request->all(),
+            )
+        );
+    }
 }

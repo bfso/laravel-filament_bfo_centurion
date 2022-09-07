@@ -48,8 +48,8 @@ class GameSeeder extends Seeder {
             ->create();
 
         // Map Fields
-        for ($y = 0; $y <= 10; $y++) {
-            for ($x = 0; $x <= 10; $x++) {
+        for ($y = 0; $y <= 20; $y++) {
+            for ($x = 0; $x <= 20; $x++) {
                 $mapField = MapField::factory()->create(
                     [
                         'x' => $x,

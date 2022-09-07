@@ -17,14 +17,11 @@ use App\Models\Player;
 class DiscardAction extends BaseAction {
 
     public function do() {
-        /** @var Player $player */
-        $player = $this
-            ->command
-            ->player;
-
-        $inventoryItem = InventoryItem::with('item')->whereHas('item', function($query) {
+        $inventoryItem = InventoryItem::with(['item','inventory'])->whereHas('item', function($query) {
             return $query->where('key', $this->command->subject);
-        })->where('player_id', $player->id)->first();
+        })->whereHas('inventory', function($query) {
+            return $query->where('player_id', $this->command->player->id);
+        })->first();
 
         if ($inventoryItem) {
             $inventoryItem->delete();

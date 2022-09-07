@@ -3,6 +3,7 @@
 namespace App\Domain\Game\Factories;
 
 use App\Domain\Cmd\Actions\GoAction;
+use App\Domain\Cmd\Actions\InteractAction;
 use App\Domain\Cmd\Actions\LookAction;
 use App\Domain\Cmd\Actions\TakeAction;
 use App\Domain\EventMessages\Actions\ShowEventMessagesAction;
@@ -39,6 +40,9 @@ class ActionFactory {
         }
         if ($command->action == "look") {
             return new LookAction($command);
+        }
+        if ($command->action == "interact") {
+            return new InteractAction($command);
         }
         if ($command->action == "go") {
             return new GoAction($command);
