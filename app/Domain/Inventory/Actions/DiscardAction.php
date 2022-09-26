@@ -5,7 +5,7 @@ namespace App\Domain\Inventory\Actions;
 use App\Domain\Game\Actions\ActionResult;
 use App\Domain\Game\Actions\BaseAction;
 use App\Domain\Inventory\Handler\FindInventoryItem;
-use App\Models\InventoryItem;
+use App\Domain\Inventory\Handler\DiscardInventoryItem;
 
 /**
  * Class DiscardAction
@@ -16,25 +16,29 @@ use App\Models\InventoryItem;
 class DiscardAction extends BaseAction {
 
     public function do() {
-        $inventoryItem  = (new InventoryItem)(
+        $inventoryItem  = (new FindInventoryItem)(
             $this->command->subject,
             $this->command->player
         );
 
         if ($inventoryItem) {
-            $inventoryItem->delete();
+            $discardedItem = (new DiscardInventoryItem)(
+                $this->command->player->mapField,
+                $inventoryItem
+            );
+
             return new ActionResult(
                 true,
-                "The following item has been discarded:",
+                "The following items has been discarded:",
                 'item-discarded',
                 [
-                    'item' => $inventoryItem
+                    'items' => [$discardedItem]
                 ]
             );
         }
         return new ActionResult(
             false,
-            "The item can not be found.",
+            "The items can not be found.",
             "item-not-found"
         );
     }
