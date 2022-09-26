@@ -37,13 +37,10 @@ class HandleInteractionResult {
             );
         }
 
-        $spearInInventory = InventoryItem::with(['item', 'inventory'])
-            ->whereHas('inventory', function($query) use ($command) {
-                return $query->where('player_id', $command->player->id);
-            })
-            ->whereHas('item', function($query) {
-                return $query->where('key', 'spear');
-            })->first();
+        $spearInInventory = (new InventoryItem)(
+            'spear',
+            $player
+        );
 
         if (!$spearInInventory) {
             return new ActionResult(

@@ -4,9 +4,8 @@ namespace App\Domain\Inventory\Actions;
 
 use App\Domain\Game\Actions\ActionResult;
 use App\Domain\Game\Actions\BaseAction;
-use App\Models\Inventory;
+use App\Domain\Inventory\Handler\FindInventoryItem;
 use App\Models\InventoryItem;
-use App\Models\Player;
 
 /**
  * Class DiscardAction
@@ -17,11 +16,10 @@ use App\Models\Player;
 class DiscardAction extends BaseAction {
 
     public function do() {
-        $inventoryItem = InventoryItem::with(['item','inventory'])->whereHas('item', function($query) {
-            return $query->where('key', $this->command->subject);
-        })->whereHas('inventory', function($query) {
-            return $query->where('player_id', $this->command->player->id);
-        })->first();
+        $inventoryItem  = (new InventoryItem)(
+            $this->command->subject,
+            $this->command->player
+        );
 
         if ($inventoryItem) {
             $inventoryItem->delete();
