@@ -51,6 +51,7 @@ class Craft implements ShouldQueue, ShouldBeUnique { //
                 function($item) {
                     return CreateNewInventoryItem::handle($item, $this->command);
                 },
-            ]), $this->command->player);
+            ]
+        ), $this->command->player);
     }
 }

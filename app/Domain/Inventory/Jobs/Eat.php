@@ -16,15 +16,16 @@ class Eat extends Craft {
     public function handle() {
         $item = $this->getItem();
 
-        $actionResult = $this->run($item,[
-            function($item) {
-                return ItemExistsCheck::handle($item, $this->command);
-            },
-            function($item) {
-                return IncreaseHealthByEating::handle($item, $this->command);
-            },
-        ]);
-
-        CraftingFinished::dispatch($actionResult);
+        CraftingFinished::dispatch($this->run(
+            $item,
+            [
+                function($item) {
+                    return ItemExistsCheck::handle($item, $this->command);
+                },
+                function($item) {
+                    return IncreaseHealthByEating::handle($item, $this->command);
+                },
+            ]
+        ), $this->command->player);
     }
 }

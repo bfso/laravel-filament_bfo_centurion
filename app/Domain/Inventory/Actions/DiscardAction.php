@@ -4,7 +4,7 @@ namespace App\Domain\Inventory\Actions;
 
 use App\Domain\Game\Actions\ActionResult;
 use App\Domain\Game\Actions\BaseAction;
-use App\Domain\Inventory\Handler\FindInventoryItem;
+use App\Domain\Inventory\Handler\FindInventoryItems;
 use App\Domain\Inventory\Handler\DiscardInventoryItem;
 
 /**
@@ -16,10 +16,10 @@ use App\Domain\Inventory\Handler\DiscardInventoryItem;
 class DiscardAction extends BaseAction {
 
     public function do() {
-        $inventoryItem  = (new FindInventoryItem)(
+        $inventoryItem = (new FindInventoryItems)(
             $this->command->subject,
             $this->command->player
-        );
+        )->first();
 
         if ($inventoryItem) {
             $discardedItem = (new DiscardInventoryItem)(

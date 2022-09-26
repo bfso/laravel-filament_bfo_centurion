@@ -3,17 +3,16 @@
 namespace App\Domain\Inventory\Reactions;
 
 use App\Domain\Game\Actions\ActionResult;
-use App\Models\InventoryItem;
+use App\Domain\Inventory\Handler\FindInventoryItems;
 
 class IncreaseHealthByEating {
     public static function handle($item, $command) {
-        $inventoryItem = InventoryItem::with(['item', 'inventory'])
-            ->whereHas('inventory', function($query) use ($command) {
-                return $query->where('player_id', $command->player->id);
-            })
-            ->whereHas('item', function($query) use ($item) {
-                return $query->where('key', $item->key);
-            })->first();
+        $player = $command->player;
+
+        $inventoryItem = (new FindInventoryItems)(
+            $item->key,
+            $player
+        )->first();
 
         if (!$inventoryItem) {
             return new ActionResult(
@@ -23,7 +22,14 @@ class IncreaseHealthByEating {
             );
         }
 
-        $player = $command->player;
+        if (!$inventoryItem->item->eatable) {
+            return new ActionResult(
+                false,
+                "It's not possible to restore your health, since the item is not eatable",
+                "item-not-eatable"
+            );
+        }
+
         $player->health = $player->health + $item->restores_health_by;
         $player->save();
         $inventoryItem->delete();
