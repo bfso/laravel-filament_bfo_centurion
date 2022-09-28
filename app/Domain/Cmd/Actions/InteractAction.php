@@ -4,10 +4,7 @@ namespace App\Domain\Cmd\Actions;
 
 use App\Domain\Game\Actions\ActionResult;
 use App\Domain\Game\Actions\BaseAction;
-use App\Domain\Inventory\Jobs\Craft;
 use App\Domain\Inventory\Jobs\Interact;
-use App\Models\Item;
-use App\Models\MapFieldItem;
 
 class InteractAction extends BaseAction {
 
