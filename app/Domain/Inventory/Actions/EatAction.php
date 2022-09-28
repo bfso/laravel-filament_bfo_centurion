@@ -8,7 +8,7 @@ use App\Domain\Inventory\Jobs\Eat;
 
 class EatAction extends BaseAction
 {
-    public function do()
+    public function do(): ActionResult
     {
         dispatch(new Eat($this->command));
 

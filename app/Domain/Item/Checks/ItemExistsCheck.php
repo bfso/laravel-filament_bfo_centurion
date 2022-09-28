@@ -13,7 +13,7 @@ class ItemExistsCheck
      * @param  Command  $command
      * @return ActionResult
      */
-    public static function handle(Item|null $item, Command $command)
+    public static function handle(Item|null $item, Command $command): ActionResult
     {
         if (! $item) {
             return new ActionResult(

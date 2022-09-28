@@ -87,7 +87,7 @@ class HandleInteractionResult
         );
     }
 
-    public static function failed()
+    public static function failed(): ActionResult
     {
         return new ActionResult(
             true,

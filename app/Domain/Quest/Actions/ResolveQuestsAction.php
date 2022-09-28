@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
  */
 class ResolveQuestsAction extends BaseAction
 {
-    public function do()
+    public function do(): ActionResult
     {
         /** @var Player $player */
         $player = $this

@@ -20,12 +20,12 @@ class CraftTorchQuestResolver
 
     protected Quest|null $quest = null;
 
-    public function title()
+    public function title(): string
     {
         return 'Burn them!';
     }
 
-    public function description()
+    public function description(): string
     {
         return 'Craft a torch. Torches are usually made with wax';
     }

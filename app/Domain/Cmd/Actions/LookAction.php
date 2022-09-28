@@ -7,7 +7,7 @@ use App\Domain\Game\Actions\BaseAction;
 
 class LookAction extends BaseAction
 {
-    public function do()
+    public function do(): ActionResult
     {
         $player = $this
             ->command

@@ -8,7 +8,7 @@ use App\Models\InventoryItem;
 
 class CreateNewInventoryItem
 {
-    public static function handle($item, $command)
+    public static function handle($item, $command): ActionResult
     {
         $inventory = Inventory::where('player_id', $command->player->id)->first();
         $inventoryItem = new InventoryItem([

@@ -8,7 +8,7 @@ use App\Domain\Inventory\Jobs\Interact;
 
 class InteractAction extends BaseAction
 {
-    public function do()
+    public function do(): ActionResult
     {
         dispatch(new Interact($this->command));
 

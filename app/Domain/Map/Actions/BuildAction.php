@@ -8,7 +8,7 @@ use App\Jobs\Build;
 
 class BuildAction extends BaseAction
 {
-    public function do()
+    public function do(): ActionResult
     {
         Build::dispatch($this->command)
             ->delay(2);

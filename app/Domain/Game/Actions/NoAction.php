@@ -4,7 +4,7 @@ namespace App\Domain\Game\Actions;
 
 class NoAction extends BaseAction
 {
-    public function do()
+    public function do(): ActionResult
     {
         return new ActionResult(
             false,

@@ -13,7 +13,7 @@ class Eat extends Craft
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         $item = $this->getItem();
 

@@ -23,7 +23,7 @@ class StoreQueuedActionFinnishMessage
      * @param  CraftingFinished  $event
      * @return void
      */
-    public function handle(CraftingFinished $event)
+    public function handle(CraftingFinished $event): void
     {
         $eventMessage = new EventMessage([
             'is_successful' => $event->actionResult->success,

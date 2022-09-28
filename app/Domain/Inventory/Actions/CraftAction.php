@@ -8,7 +8,7 @@ use App\Domain\Inventory\Jobs\Craft;
 
 class CraftAction extends BaseAction
 {
-    public function do()
+    public function do(): ActionResult
     {
         dispatch(new Craft($this->command));
         //$emailJob = (new SendEmailJob())->delay(Carbon::now()->addSeconds(3));

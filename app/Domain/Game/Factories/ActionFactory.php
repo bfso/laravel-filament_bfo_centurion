@@ -7,6 +7,7 @@ use App\Domain\Cmd\Actions\InteractAction;
 use App\Domain\Cmd\Actions\LookAction;
 use App\Domain\Cmd\Actions\TakeAction;
 use App\Domain\EventMessages\Actions\ShowEventMessagesAction;
+use App\Domain\Game\Actions\BaseAction;
 use App\Domain\Game\Actions\NoAction;
 use App\Domain\Inventory\Actions\CraftAction;
 use App\Domain\Inventory\Actions\DiscardAction;
@@ -19,7 +20,7 @@ use App\Game\Cmd\Command;
 
 class ActionFactory
 {
-    public static function create(Command $command)
+    public static function create(Command $command): BaseAction
     {
         if ($command->action == 'show') {
             return new ShowAction($command);

@@ -7,7 +7,7 @@ use App\Domain\Inventory\Handler\FindInventoryItems;
 
 class IncreaseHealthByEating
 {
-    public static function handle($item, $command)
+    public static function handle($item, $command): ActionResult
     {
         $player = $command->player;
 

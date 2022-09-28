@@ -10,7 +10,7 @@ use Nette\NotImplementedException;
 
 trait Resolveable
 {
-    public function resolve(Player $player, Quest $quest)
+    public function resolve(Player $player, Quest $quest): ActionResult
     {
         $this->player = $player;
         $this->quest = $quest;
@@ -46,7 +46,7 @@ trait Resolveable
         );
     }
 
-    public function isQuestOpen()
+    public function isQuestOpen(): bool
     {
         $playerQuest = PlayerQuest::where('player_id', $this->player->id)
             ->where('quest_id', $this->quest->id)
@@ -67,7 +67,7 @@ trait Resolveable
         return true;
     }
 
-    protected function completeQuest()
+    protected function completeQuest(): void
     {
         PlayerQuest::where('player_id', $this->player->id)
             ->where('quest_id', $this->quest->id)

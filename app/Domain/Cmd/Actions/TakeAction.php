@@ -9,7 +9,7 @@ use App\Models\MapFieldItem;
 
 class TakeAction extends BaseAction
 {
-    public function do()
+    public function do(): ActionResult
     {
         $mapField = $this->mapField = $this
             ->command

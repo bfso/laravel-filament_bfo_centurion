@@ -23,7 +23,7 @@ class ResolveCraftingQuests
      * @param  CraftingFinished  $event
      * @return void
      */
-    public function handle(CraftingFinished $event)
+    public function handle(CraftingFinished $event): void
     {
         // @todo command is missing here to resolve a quest automatically
         // (new CraftTorchQuestResolver())->resolve();

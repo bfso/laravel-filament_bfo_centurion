@@ -22,17 +22,17 @@ class FindApplesQuestResolver
 
     protected Quest|null $quest = null;
 
-    public function title()
+    public function title(): string
     {
         return 'Apple Jack';
     }
 
-    public function description()
+    public function description(): string
     {
         return 'Find '.self::REQUIRED_COUNT.' Apples';
     }
 
-    public function key()
+    public function key(): string
     {
         $className = get_class($this);
         $questKey = explode('\\', $className);
@@ -54,7 +54,7 @@ class FindApplesQuestResolver
             ->take(self::REQUIRED_COUNT);
     }
 
-    public function isConditionMet()
+    public function isConditionMet(): bool
     {
         if ($this->data == null) {
             $this->data = $this->data();
@@ -63,13 +63,13 @@ class FindApplesQuestResolver
         return $this->data->count() == self::REQUIRED_COUNT;
     }
 
-    protected function payQuestCost()
+    protected function payQuestCost(): void
     {
         $ids = $this->data->pluck('pivot.id');
         InventoryItem::whereIn('id', $ids)->delete();
     }
 
-    protected function reward()
+    protected function reward(): void
     {
         Inventory::where('player_id', $this->player->id)
             ->where('key', 'linen-bag')

@@ -12,7 +12,7 @@ use App\Models\Player;
  */
 class ShowQuestsAction extends BaseAction
 {
-    public function do()
+    public function do(): ActionResult
     {
         /** @var Player $player */
         $player = $this

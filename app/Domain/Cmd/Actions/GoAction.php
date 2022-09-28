@@ -9,7 +9,7 @@ use App\Models\MapField;
 
 class GoAction extends BaseAction
 {
-    public function do()
+    public function do(): ActionResult
     {
         $player = $this->command->player;
         $position = new Position($player->mapField->x, $player->mapField->y);
@@ -30,7 +30,7 @@ class GoAction extends BaseAction
         return $this->cantGoThereActionResult();
     }
 
-    protected function goRight($position)
+    protected function goRight(Position $position): ActionResult
     {
         $newX = $position->x + 1;
         $newMapField = MapField::where('x', $newX)->where('y', $position->y)->first();
@@ -38,7 +38,7 @@ class GoAction extends BaseAction
         return $this->goToMapField($newMapField);
     }
 
-    protected function goLeft($position)
+    protected function goLeft(Position $position): ActionResult
     {
         $newX = $position->x - 1;
         $newMapField = MapField::where('x', $newX)->where('y', $position->y)->first();
@@ -46,7 +46,7 @@ class GoAction extends BaseAction
         return $this->goToMapField($newMapField);
     }
 
-    protected function goUp($position)
+    protected function goUp(Position $position): ActionResult
     {
         $newY = $position->y - 1;
         $newMapField = MapField::where('x', $position->x)->where('y', $newY)->first();
@@ -54,7 +54,7 @@ class GoAction extends BaseAction
         return $this->goToMapField($newMapField);
     }
 
-    protected function goDown($position)
+    protected function goDown(Position $position): ActionResult
     {
         $newY = $position->y + 1;
         $newMapField = MapField::where('x', $position->x)->where('y', $newY)->first();
@@ -62,7 +62,7 @@ class GoAction extends BaseAction
         return $this->goToMapField($newMapField);
     }
 
-    public function goToMapField($newMapField)
+    public function goToMapField(MapField|null $newMapField): ActionResult
     {
         if (! $newMapField) {
             return $this->cantGoThereActionResult();
@@ -80,7 +80,7 @@ class GoAction extends BaseAction
         );
     }
 
-    public function cantGoThereActionResult()
+    public function cantGoThereActionResult(): ActionResult
     {
         return new ActionResult(
             false,

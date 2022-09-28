@@ -13,7 +13,7 @@ use App\Domain\Inventory\Handler\FindInventoryItems;
  */
 class DiscardAction extends BaseAction
 {
-    public function do()
+    public function do(): ActionResult
     {
         $inventoryItem = (new FindInventoryItems)(
             $this->command->subject,

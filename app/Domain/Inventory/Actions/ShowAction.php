@@ -13,7 +13,7 @@ use App\Models\Player;
  */
 class ShowAction extends BaseAction
 {
-    public function do()
+    public function do(): ActionResult
     {
         /** @var Player $player */
         $player = $this

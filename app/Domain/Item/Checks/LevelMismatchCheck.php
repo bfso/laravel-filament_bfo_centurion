@@ -6,7 +6,7 @@ use App\Domain\Game\Actions\ActionResult;
 
 class LevelMismatchCheck
 {
-    public static function handle($item, $command)
+    public static function handle($item, $command): ActionResult
     {
         if ($item->level > $command->player->level) {
             return new ActionResult(
