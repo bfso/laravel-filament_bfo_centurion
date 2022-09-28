@@ -3,6 +3,7 @@
 namespace App\Domain\Inventory\Events;
 
 use App\Domain\Game\Actions\ActionResult;
+use App\Models\Item;
 use App\Models\Player;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -25,15 +26,22 @@ class CraftingFinished
     public Player $player;
 
     /**
+     * @var Item|null
+     */
+    public Item|null $item;
+
+    /**
      * CraftingFinished constructor.
      *
-     * @param  ActionResult  $actionResult
-     * @param  Player  $player
+     * @param ActionResult $actionResult
+     * @param Player $player
+     * @param Item|null $item
      */
-    public function __construct(ActionResult $actionResult, Player $player)
+    public function __construct(ActionResult $actionResult, Player $player, Item|null $item = null)
     {
         $this->actionResult = $actionResult;
         $this->player = $player;
+        $this->item = $item;
     }
 
     /**

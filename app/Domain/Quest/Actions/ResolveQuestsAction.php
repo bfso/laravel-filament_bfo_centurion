@@ -21,11 +21,8 @@ class ResolveQuestsAction extends BaseAction
             ->command
             ->player;
 
-        $class = "App\Domain\Quest\Resolvers\\".Str::of($this->command->subject)->camel()->ucfirst().'QuestResolver';
-        if (class_exists($class)) {
-            $resolver = new $class;
-            $quest = Quest::where('quest', $class)->first();
-
+        $resolver = (new QuestResolverFactory())($this->command->subject);
+        if($quest){
             return $resolver->resolve($player, $quest);
         }
 

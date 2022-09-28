@@ -3,6 +3,7 @@
 namespace App\Domain\Quest\Resolvers;
 
 use App\Domain\Quest\Traits\Resolveable;
+use App\Models\Inventory;
 use App\Models\Player;
 use App\Models\Quest;
 use Illuminate\Support\Collection;
@@ -11,8 +12,6 @@ use Illuminate\Support\Str;
 class CraftTorchQuestResolver
 {
     use Resolveable;
-
-    const REQUIRED_COUNT = 3;
 
     protected Player|null $player = null;
 
@@ -30,7 +29,7 @@ class CraftTorchQuestResolver
         return 'Craft a torch. Torches are usually made with wax';
     }
 
-    public function key()
+    public function key() : string
     {
         $className = get_class($this);
         $questKey = explode('\\', $className);
@@ -42,19 +41,29 @@ class CraftTorchQuestResolver
 
     protected function data()
     {
-        return collect();
+        return Inventory::where('player_id', $this->player->id)
+            ->with('items', function ($q) {
+                $q->where('key', 'torch');
+            })
+            ->get()
+            ->pluck('items')
+            ->flatten();
     }
 
-    public function isConditionMet()
+    public function isConditionMet() : bool
     {
-        return true;
+        if ($this->data->count() > 0) {
+            return true;
+        }
+        return false;
     }
 
-    protected function payQuestCost()
+    protected function payQuestCost() : void
     {
+        // No quest costs needed
     }
 
-    protected function reward()
+    protected function reward() : void
     {
         $this->player->experience += $this->quest->experience;
         $this->player->save();
@@ -62,6 +71,6 @@ class CraftTorchQuestResolver
 
     protected function rewardText(): string
     {
-        return 'Congratulation! You received a experience as a reward!';
+        return 'Congratulation! You received experience as a reward!';
     }
 }
