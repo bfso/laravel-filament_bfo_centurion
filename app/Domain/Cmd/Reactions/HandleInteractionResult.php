@@ -3,6 +3,7 @@
 namespace App\Domain\Cmd\Reactions;
 
 use App\Domain\Game\Actions\ActionResult;
+use App\Domain\Inventory\Handler\FindInventoryItems;
 use App\Domain\Map\Position;
 use App\Game\Cmd\Command;
 use App\Models\InventoryItem;
@@ -11,46 +12,56 @@ use App\Models\MapFieldItem;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Support\Arr;
 
-class HandleInteractionResult {
+class HandleInteractionResult
+{
     /**
      * @param Item $item
      * @param Command $command
      * @return ActionResult
      */
-    public static function handle(Item $item, Command $command): ActionResult {
+    public static function handle(Item $item, Command $command): ActionResult
+    {
+
         $player = $command->player;
         $mapField = $player->mapField;
 
-        if ($command->subject != 'bee-hive') {
+        if (!$item->interactable) {
             return new ActionResult(
                 false,
-                "Can't interact with this because the item " . $command->subject . " is missing.",
+                "Can't interact with " . $command->subject . ".",
                 "can-not-interact-with-item"
             );
         }
 
-        if ($command->data['using'][0] != 'spear') {
-            return new ActionResult(
-                false,
-                "Can't interact with this because an appropriate tool is needed.",
-                "can-not-interact-need-a-tool"
-            );
+        $requiredItemKeys = $item->requires->pluck('key')->flatten();
+
+        foreach ($requiredItemKeys as $requiredItemKey) {
+            if (!in_array($requiredItemKey, $command->data['using'])) {
+                return new ActionResult(
+                    false,
+                    "Can't interact with this because the correct tools have to be defined.",
+                    "can-not-interact-tool-has-to-be-defined"
+                );
+            }
         }
 
-        $spearInInventory = (new InventoryItem)(
-            'spear',
-            $player
-        );
-
-        if (!$spearInInventory) {
-            return new ActionResult(
-                false,
-                "Can't interact with this because the appropriate tool is missing.",
-                "can-not-interact-tool-missing",
-                [
-                    'player_id' => $command->player->id
-                ]
-            );
+        // Check if the tools is in the players inventory
+        /** @todo query in a loop, refactor */
+        foreach ($requiredItemKeys as $requiredItemKey) {
+            $inventoryItem = (new FindInventoryItems)(
+                $requiredItemKey,
+                $command->player
+            )->first();
+            if (!$inventoryItem) {
+                return new ActionResult(
+                    false,
+                    "Can't interact with this because the appropriate tools are missing.",
+                    "can-not-interact-tool-missing-in-inventory",
+                    [
+                        'player_id' => $command->player->id
+                    ]
+                );
+            }
         }
 
         $mapFieldItem = MapFieldItem::where('item_id', $item->id)->where('map_field_id', $mapField->id)->first();
@@ -63,20 +74,13 @@ class HandleInteractionResult {
         }
         $mapFieldItem->delete();
 
-        $wax = Item::where('key', 'wax')->first();
-        $honey = Item::where('key', 'honey')->first();
-
-        MapFieldItem::create(
-            [
-                'map_field_id' => $mapField->id,
-                'item_id' => $wax->id
-            ]);
-
-        MapFieldItem::create(
-            [
-                'map_field_id' => $mapField->id,
-                'item_id' => $honey->id
-            ]);
+        foreach ($item->produces as $producesItem) {
+            MapFieldItem::create(
+                [
+                    'map_field_id' => $mapField->id,
+                    'item_id' => $producesItem->id
+                ]);
+        }
 
         return new ActionResult(
             true,
@@ -86,10 +90,10 @@ class HandleInteractionResult {
                 'item' => $command->subject
             ]
         );
-
     }
 
-    public static function failed() {
+    public static function failed()
+    {
         return new ActionResult(
             true,
             "Can't interact with this.",

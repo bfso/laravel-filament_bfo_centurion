@@ -17,10 +17,12 @@ class CreateItemBlueprintsTable extends Migration
             $table->id();
             $table->unsignedInteger('count')->default(1);
             $table->unsignedBigInteger('item_id');
-            $table->unsignedBigInteger('required_item_id');
+            $table->unsignedBigInteger('required_item_id')->nullable();
+            $table->unsignedBigInteger('produces_item_id')->nullable();
 
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
             $table->foreign('required_item_id')->references('id')->on('items')->onDelete('cascade');
+            $table->foreign('produces_item_id')->references('id')->on('items')->onDelete('cascade');
             $table->timestamps();
         });
     }

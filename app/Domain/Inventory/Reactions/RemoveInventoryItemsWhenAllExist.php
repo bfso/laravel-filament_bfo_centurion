@@ -16,7 +16,7 @@ class RemoveInventoryItemsWhenAllExist {
      */
     public static function handle(Item $item, Command $command): ActionResult {
         $itemsToRemove = collect();
-        foreach ($item->blueprints as $blueprintItem) {
+        foreach ($item->requires as $blueprintItem) {
             // Check if the ingredients provided by the player
             // are matching the items blueprint ingredients
             if (!in_array($blueprintItem->key, $command->data['with'])) {

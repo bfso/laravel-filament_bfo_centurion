@@ -22,7 +22,7 @@ class Craft implements ShouldQueue, ShouldBeUnique { //
     use CommandWorker;
 
     protected function getItem() {
-        return Item::with('blueprints')
+        return Item::with('requires')
             ->where('key', $this->command->subject)
             ->where($this->command->action . 'able', true)
             ->first();
