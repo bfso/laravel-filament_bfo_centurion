@@ -8,22 +8,24 @@ use App\Game\Cmd\Command;
 use App\Models\InventoryItem;
 use App\Models\Item;
 
-class RemoveInventoryItemsWhenAllExist {
+class RemoveInventoryItemsWhenAllExist
+{
     /**
-     * @param Item $item
-     * @param Command $command
+     * @param  Item  $item
+     * @param  Command  $command
      * @return ActionResult
      */
-    public static function handle(Item $item, Command $command): ActionResult {
+    public static function handle(Item $item, Command $command): ActionResult
+    {
         $itemsToRemove = collect();
         foreach ($item->requires as $blueprintItem) {
             // Check if the ingredients provided by the player
             // are matching the items blueprint ingredients
-            if (!in_array($blueprintItem->key, $command->data['with'])) {
+            if (! in_array($blueprintItem->key, $command->data['with'])) {
                 return new ActionResult(
                     false,
-                    $command->action . "ing of " . $command->subject . " not possible since the ingredients are not correct",
-                    "ingredients-mismatch"
+                    $command->action.'ing of '.$command->subject.' not possible since the ingredients are not correct',
+                    'ingredients-mismatch'
                 );
             }
 
@@ -38,8 +40,8 @@ class RemoveInventoryItemsWhenAllExist {
             if ($inventoryItems->count() < $blueprintItem->pivot->count) {
                 return new ActionResult(
                     false,
-                    $command->action . "ing of " . $command->subject . " not possible since " . $blueprintItem->key . " is missing",
-                    "ingredients-missing"
+                    $command->action.'ing of '.$command->subject.' not possible since '.$blueprintItem->key.' is missing',
+                    'ingredients-missing'
                 );
             }
             $itemsToRemove = $itemsToRemove->merge($inventoryItems);
@@ -47,10 +49,11 @@ class RemoveInventoryItemsWhenAllExist {
 
         // Remove all collected ingredients from the players inventory
         InventoryItem::destroy($itemsToRemove->pluck('id'));
+
         return new ActionResult(
             true,
-            "Items successfully removed from inventory",
-            "items-removal-successful"
+            'Items successfully removed from inventory',
+            'items-removal-successful'
         );
     }
 }

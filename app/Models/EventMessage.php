@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EventMessage extends Model {
+class EventMessage extends Model
+{
     use HasFactory;
 
     protected $casts = [
@@ -18,6 +19,6 @@ class EventMessage extends Model {
         'message',
         'key',
         'data',
-        'player_id'
+        'player_id',
     ];
 }

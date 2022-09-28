@@ -4,12 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *
@@ -46,10 +44,10 @@ class UserSeeder extends Seeder
             'name' => 'giacomo',
             'password' => Hash::make('giacomo.piperata@lernende.bfo-vs.ch'),
         ]);
-
     }
 
-    private static function strRandom($length = 16) {
-        return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
+    private static function strRandom($length = 16)
+    {
+        return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
     }
 }

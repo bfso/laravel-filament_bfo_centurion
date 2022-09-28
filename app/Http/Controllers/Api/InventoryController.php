@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Game\Cmd\Command;
 use Illuminate\Http\Request;
 
-class InventoryController extends CommandController {
-    public function show(Request $request) {
+class InventoryController extends CommandController
+{
+    public function show(Request $request)
+    {
         return $this->sendResponse(
             new Command(
                 'show'
@@ -14,7 +16,8 @@ class InventoryController extends CommandController {
         );
     }
 
-    public function discard(Request $request) {
+    public function discard(Request $request)
+    {
         return $this->sendResponse(
             new Command(
                 'discard',
@@ -23,7 +26,8 @@ class InventoryController extends CommandController {
         );
     }
 
-    public function craft(Request $request) {
+    public function craft(Request $request)
+    {
         //return response()->json($request->item, 200);
         return $this->sendResponse(
             new Command(
@@ -34,7 +38,8 @@ class InventoryController extends CommandController {
         );
     }
 
-    public function eat(Request $request) {
+    public function eat(Request $request)
+    {
         //return response()->json($request->item, 200);
         return $this->sendResponse(
             new Command(

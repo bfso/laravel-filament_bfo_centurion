@@ -2,16 +2,20 @@
 
 namespace App\Domain\Game\Actions;
 
-class ActionResult {
+class ActionResult
+{
     public $success = false;
-    public $message = "";
+
+    public $message = '';
+
     public $key = null;
+
     public $data = null;
 
     public function __construct(
         $success,
         $message,
-        $key = "",
+        $key = '',
         $data = null
     ) {
         $this->success = $success;

@@ -16,17 +16,20 @@ class MapField extends Model
         'z',
     ];
 
-    public function items(){
-        return $this->belongsToMany(Item::class,'map_field_items')
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'map_field_items')
             ->using(MapFieldItem::class)
             ->withPivot('id');
     }
 
-    public function players(){
+    public function players()
+    {
         return $this->hasMany(Player::class);
     }
 
-    public function position(){
+    public function position()
+    {
         return new Position(
             $this->x,
             $this->y,

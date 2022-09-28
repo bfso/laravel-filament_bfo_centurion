@@ -6,23 +6,24 @@ use App\Domain\Inventory\Events\CraftingFinished;
 use App\Domain\Inventory\Reactions\IncreaseHealthByEating;
 use App\Domain\Item\Checks\ItemExistsCheck;
 
-class Eat extends Craft {
-
+class Eat extends Craft
+{
     /**
      * Execute the job.
      *
      * @return void
      */
-    public function handle() {
+    public function handle()
+    {
         $item = $this->getItem();
 
         CraftingFinished::dispatch($this->run(
             $item,
             [
-                function($item) {
+                function ($item) {
                     return ItemExistsCheck::handle($item, $this->command);
                 },
-                function($item) {
+                function ($item) {
                     return IncreaseHealthByEating::handle($item, $this->command);
                 },
             ]

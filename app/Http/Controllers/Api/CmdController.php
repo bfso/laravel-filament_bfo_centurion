@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Game\Cmd\Command;
 use Illuminate\Http\Request;
 
-class CmdController extends CommandController {
-    public function look(Request $request) {
+class CmdController extends CommandController
+{
+    public function look(Request $request)
+    {
         return $this->sendResponse(
             new Command(
                 'look'
@@ -14,7 +16,8 @@ class CmdController extends CommandController {
         );
     }
 
-    public function go(Request $request) {
+    public function go(Request $request)
+    {
         return $this->sendResponse(
             new Command(
                 'go',
@@ -23,7 +26,8 @@ class CmdController extends CommandController {
         );
     }
 
-    public function take(Request $request) {
+    public function take(Request $request)
+    {
         return $this->sendResponse(
             new Command(
                 'take',
@@ -32,7 +36,8 @@ class CmdController extends CommandController {
         );
     }
 
-    public function interact(Request $request) {
+    public function interact(Request $request)
+    {
         return $this->sendResponse(
             new Command(
                 'interact',

@@ -23,6 +23,7 @@ class ItemFactory extends Factory
     public function definition()
     {
         $title = $this->faker->word;
+
         return [
             'key' => Str::slug($title),
             'title' => $title,

@@ -3,17 +3,20 @@
 namespace App\Game\Cmd;
 
 use App\Models\Player;
-use Illuminate\Http\Request;
 
-class Command {
-    public string $action = "";
-    public string $subject = "";
+class Command
+{
+    public string $action = '';
+
+    public string $subject = '';
+
     public $data;
+
     public $player;
 
     public function __construct(
         string $action,
-        string $subject = "",
+        string $subject = '',
         $data = null,
         $player = null
     ) {

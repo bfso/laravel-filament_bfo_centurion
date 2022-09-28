@@ -4,14 +4,16 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEventMessagesTable extends Migration {
+class CreateEventMessagesTable extends Migration
+{
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up() {
-        Schema::create('event_messages', function(Blueprint $table) {
+    public function up()
+    {
+        Schema::create('event_messages', function (Blueprint $table) {
             $table->id();
             $table->boolean('is_successful')->nullable();
             $table->boolean('is_read')->default(false);
@@ -28,7 +30,8 @@ class CreateEventMessagesTable extends Migration {
      *
      * @return void
      */
-    public function down() {
+    public function down()
+    {
         Schema::dropIfExists('event_messages');
     }
 }

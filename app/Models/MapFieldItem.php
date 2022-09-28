@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class MapFieldItem extends Pivot
@@ -18,11 +17,13 @@ class MapFieldItem extends Pivot
         'player_id',
     ];
 
-    public function mapField(){
+    public function mapField()
+    {
         return $this->belongsTo(MapField::class);
     }
 
-    public function item(){
+    public function item()
+    {
         return $this->belongsTo(Item::class);
     }
 }

@@ -23,6 +23,7 @@ class InventoryFactory extends Factory
     public function definition()
     {
         $title = $this->faker->word;
+
         return [
             'key' => Str::slug($title),
             'slots' => 5,

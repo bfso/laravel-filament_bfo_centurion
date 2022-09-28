@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\Domain\Game\Listeners\StoreQueuedActionFinnishMessage;
 use App\Domain\Inventory\Events\CraftingFinished;
 use App\Domain\Inventory\Listeners\ResolveCraftingQuests;
-use App\Domain\Inventory\Listeners\ShowCraftingFinishedMessage;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -24,7 +23,7 @@ class EventServiceProvider extends ServiceProvider
         CraftingFinished::class => [
             StoreQueuedActionFinnishMessage::class,
             ResolveCraftingQuests::class,
-        ]
+        ],
     ];
 
     /**

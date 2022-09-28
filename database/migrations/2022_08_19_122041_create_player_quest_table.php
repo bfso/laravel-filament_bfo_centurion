@@ -4,14 +4,16 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up() {
-        Schema::create('player_quest', function(Blueprint $table) {
+    public function up()
+    {
+        Schema::create('player_quest', function (Blueprint $table) {
             $table->id();
             $table->boolean('is_started')->default(true);
             $table->boolean('is_successful')->nullable()->default(null);
@@ -31,7 +33,8 @@ return new class extends Migration {
      *
      * @return void
      */
-    public function down() {
+    public function down()
+    {
         Schema::dropIfExists('player_quest');
     }
 };

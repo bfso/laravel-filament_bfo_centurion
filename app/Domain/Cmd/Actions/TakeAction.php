@@ -7,9 +7,10 @@ use App\Domain\Game\Actions\BaseAction;
 use App\Models\InventoryItem;
 use App\Models\MapFieldItem;
 
-class TakeAction extends BaseAction {
-
-    public function do() {
+class TakeAction extends BaseAction
+{
+    public function do()
+    {
         $mapField = $this->mapField = $this
             ->command
             ->player
@@ -23,27 +24,27 @@ class TakeAction extends BaseAction {
             return new ActionResult(
                 false,
                 "Can't take that, not enough space.",
-                "not-enough-inventory-space"
+                'not-enough-inventory-space'
             );
         }
 
-        if (!$item) {
+        if (! $item) {
             return new ActionResult(
                 false,
                 "Can't take that, no item found.",
-                "no-item-found"
+                'no-item-found'
             );
         }
 
-        if (!$item->takeable) {
+        if (! $item->takeable) {
             return new ActionResult(
                 false,
-                "Not able to take that item.",
-                "item-is-not-takeable"
+                'Not able to take that item.',
+                'item-is-not-takeable'
             );
         }
 
-        if (!$inventory) {
+        if (! $inventory) {
             return new ActionResult(
                 false,
                 "Can't take that, no inventory found.",
@@ -60,7 +61,7 @@ class TakeAction extends BaseAction {
         //$mapField->items()->detach($item->id);
         return new ActionResult(
             true,
-            "The " . $this->command->subject . " is taken",
+            'The '.$this->command->subject.' is taken',
             'item-is-taken'
         );
     }

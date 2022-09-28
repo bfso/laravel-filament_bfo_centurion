@@ -5,8 +5,10 @@ namespace App\Game\Worker;
 use App\Game\Actions\ActionResult;
 use App\Models\MapFieldItem;
 
-class CreateNewMapFieldItem {
-    public static function handle($item, $command) {
+class CreateNewMapFieldItem
+{
+    public static function handle($item, $command)
+    {
         $player = $command->player;
 
         (new MapFieldItem([
@@ -15,6 +17,6 @@ class CreateNewMapFieldItem {
             'player_id' => $player->id,
         ]))->save();
 
-        return new ActionResult(true, "Building of " . $command->subject . " successful");
+        return new ActionResult(true, 'Building of '.$command->subject.' successful');
     }
 }

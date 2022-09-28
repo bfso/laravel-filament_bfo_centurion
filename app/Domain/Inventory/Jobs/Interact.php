@@ -16,14 +16,17 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Throwable;
 
-class Interact implements ShouldQueue, ShouldBeUnique { //
+class Interact implements ShouldQueue, ShouldBeUnique
+{
+ //
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     use CommandWorker;
 
-    protected function getItem() {
+    protected function getItem()
+    {
         return Item::with('requires')
             ->where('key', $this->command->subject)
-            ->where($this->command->action . 'able', true)
+            ->where($this->command->action.'able', true)
             ->first();
     }
 
@@ -32,19 +35,20 @@ class Interact implements ShouldQueue, ShouldBeUnique { //
      *
      * @throws Throwable
      */
-    public function handle() {
+    public function handle()
+    {
         $item = $this->getItem();
 
         CraftingFinished::dispatch($this->run(
             $item,
             [
-                function($item) {
+                function ($item) {
                     return ItemExistsCheck::handle($item, $this->command);
                 },
-                function($item) {
+                function ($item) {
                     return LevelMismatchCheck::handle($item, $this->command);
                 },
-                function($item) {
+                function ($item) {
                     return HandleInteractionResult::handle($item, $this->command);
                 },
             ]), $this->command->player);

@@ -10,12 +10,11 @@ use App\Models\Player;
 /**
  * Class ShowAction
  * Shows the items of all inventories
- *
- * @package App\Game\Actions
  */
-class ShowAction extends BaseAction {
-
-    public function do() {
+class ShowAction extends BaseAction
+{
+    public function do()
+    {
         /** @var Player $player */
         $player = $this
             ->command
@@ -25,17 +24,18 @@ class ShowAction extends BaseAction {
         if ($player->inventories->count() >= 1) {
             return new ActionResult(
                 true,
-                "You have the following inventories:",
-                "player-list-of-inventories",
+                'You have the following inventories:',
+                'player-list-of-inventories',
                 [
-                    'inventories' => $player->inventories
+                    'inventories' => $player->inventories,
                 ]
             );
         }
+
         return new ActionResult(
             false,
-            "No inventories found.",
-            "player-has-no-inventory"
+            'No inventories found.',
+            'player-has-no-inventory'
         );
     }
 }

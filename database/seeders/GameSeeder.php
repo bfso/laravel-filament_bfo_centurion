@@ -12,13 +12,15 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
-class GameSeeder extends Seeder {
+class GameSeeder extends Seeder
+{
     /**
      * Seed the application's database.
      *
      * @return void
      */
-    public function run() {
+    public function run()
+    {
         // Items
         $wood = Item::factory()->create(['key' => 'wood', 'takeable' => true, 'is_seeded' => true]);
         $stick = Item::factory()->create(['key' => 'stick', 'takeable' => true, 'is_seeded' => true]);

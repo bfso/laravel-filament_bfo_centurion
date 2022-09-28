@@ -10,7 +10,8 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class CraftingFinished {
+class CraftingFinished
+{
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
@@ -19,17 +20,18 @@ class CraftingFinished {
     public ActionResult $actionResult;
 
     /**
-     * @var Player $player
+     * @var Player
      */
     public Player $player;
 
     /**
      * CraftingFinished constructor.
      *
-     * @param ActionResult $actionResult
-     * @param Player $player
+     * @param  ActionResult  $actionResult
+     * @param  Player  $player
      */
-    public function __construct(ActionResult $actionResult, Player $player) {
+    public function __construct(ActionResult $actionResult, Player $player)
+    {
         $this->actionResult = $actionResult;
         $this->player = $player;
     }
@@ -39,7 +41,8 @@ class CraftingFinished {
      *
      * @return Channel|array
      */
-    public function broadcastOn() {
+    public function broadcastOn()
+    {
         return new PrivateChannel('channel-name');
     }
 }

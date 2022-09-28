@@ -11,30 +11,32 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Database\QueryException;
 
-class QuestResource extends Resource {
+class QuestResource extends Resource
+{
     protected static ?string $model = Quest::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    public static function form(Form $form): Form {
+    public static function form(Form $form): Form
+    {
         return $form
             ->schema([
                 Forms\Components\Toggle::make('is_active'),
             ]);
     }
 
-    public static function table(Table $table): Table {
+    public static function table(Table $table): Table
+    {
         return $table
             ->columns([
                 Tables\Columns\BooleanColumn::make('is_active'),
                 Tables\Columns\TextColumn::make('quest'),
                 Tables\Columns\TextColumn::make('title')->getStateUsing(
-                    function($record) {
+                    function ($record) {
                         $quest = new $record->quest();
+
                         return $quest->title();
                     }
                 ),
@@ -44,7 +46,7 @@ class QuestResource extends Resource {
             ])
             ->actions([
                 Tables\Actions\Action::make('assign_to_all')
-                    ->action(function($record) {
+                    ->action(function ($record) {
                         try {
                             $record->players()->saveMany(Player::get());
                         } catch (QueryException $e) {
@@ -63,13 +65,15 @@ class QuestResource extends Resource {
             ]);
     }
 
-    public static function getRelations(): array {
+    public static function getRelations(): array
+    {
         return [
-            RelationManagers\PlayerRelationManager::class
+            RelationManagers\PlayerRelationManager::class,
         ];
     }
 
-    public static function getPages(): array {
+    public static function getPages(): array
+    {
         return [
             'index' => Pages\ListQuests::route('/'),
             'create' => Pages\CreateQuest::route('/create'),

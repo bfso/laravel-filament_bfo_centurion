@@ -19,11 +19,13 @@ class Inventory extends Model
 
     protected $with = ['items'];
 
-    public function mapField(){
+    public function mapField()
+    {
         return $this->belongsTo(MapField::class);
     }
 
-    public function items(){
+    public function items()
+    {
         return $this->belongsToMany(Item::class)
             ->using(InventoryItem::class)
             ->withPivot('id');

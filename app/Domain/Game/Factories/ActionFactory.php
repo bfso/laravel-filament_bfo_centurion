@@ -9,51 +9,52 @@ use App\Domain\Cmd\Actions\TakeAction;
 use App\Domain\EventMessages\Actions\ShowEventMessagesAction;
 use App\Domain\Game\Actions\NoAction;
 use App\Domain\Inventory\Actions\CraftAction;
+use App\Domain\Inventory\Actions\DiscardAction;
 use App\Domain\Inventory\Actions\EatAction;
 use App\Domain\Inventory\Actions\ShowAction;
-use App\Domain\Inventory\Actions\DiscardAction;
 use App\Domain\Map\Actions\BuildAction;
 use App\Domain\Quest\Actions\ResolveQuestsAction;
 use App\Domain\Quest\Actions\ShowQuestsAction;
 use App\Game\Cmd\Command;
 
-class ActionFactory {
-    public static function create(Command $command) {
-
-        if ($command->action == "show") {
+class ActionFactory
+{
+    public static function create(Command $command)
+    {
+        if ($command->action == 'show') {
             return new ShowAction($command);
         }
-        if ($command->action == "discard") {
+        if ($command->action == 'discard') {
             return new DiscardAction($command);
         }
-        if ($command->action == "eat") {
+        if ($command->action == 'eat') {
             return new EatAction($command);
         }
-        if ($command->action == "craft") {
+        if ($command->action == 'craft') {
             return new CraftAction($command);
         }
-        if ($command->action == "build") {
+        if ($command->action == 'build') {
             return new BuildAction($command);
         }
-        if ($command->action == "take") {
+        if ($command->action == 'take') {
             return new TakeAction($command);
         }
-        if ($command->action == "look") {
+        if ($command->action == 'look') {
             return new LookAction($command);
         }
-        if ($command->action == "interact") {
+        if ($command->action == 'interact') {
             return new InteractAction($command);
         }
-        if ($command->action == "go") {
+        if ($command->action == 'go') {
             return new GoAction($command);
         }
-        if ($command->action == "show-quests") {
+        if ($command->action == 'show-quests') {
             return new ShowQuestsAction($command);
         }
-        if ($command->action == "resolve-quests") {
+        if ($command->action == 'resolve-quests') {
             return new ResolveQuestsAction($command);
         }
-        if ($command->action == "show-event-messages") {
+        if ($command->action == 'show-event-messages') {
             return new ShowEventMessagesAction($command);
         }
 

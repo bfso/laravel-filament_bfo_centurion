@@ -4,18 +4,17 @@ namespace App\Domain\Inventory\Actions;
 
 use App\Domain\Game\Actions\ActionResult;
 use App\Domain\Game\Actions\BaseAction;
-use App\Domain\Inventory\Handler\FindInventoryItems;
 use App\Domain\Inventory\Handler\DiscardInventoryItem;
+use App\Domain\Inventory\Handler\FindInventoryItems;
 
 /**
  * Class DiscardAction
  * Discards one item
- *
- * @package App\Game\Actions
  */
-class DiscardAction extends BaseAction {
-
-    public function do() {
+class DiscardAction extends BaseAction
+{
+    public function do()
+    {
         $inventoryItem = (new FindInventoryItems)(
             $this->command->subject,
             $this->command->player
@@ -29,17 +28,18 @@ class DiscardAction extends BaseAction {
 
             return new ActionResult(
                 true,
-                "The following items has been discarded:",
+                'The following items has been discarded:',
                 'item-discarded',
                 [
-                    'items' => [$discardedItem]
+                    'items' => [$discardedItem],
                 ]
             );
         }
+
         return new ActionResult(
             false,
-            "The items can not be found.",
-            "item-not-found"
+            'The items can not be found.',
+            'item-not-found'
         );
     }
 }

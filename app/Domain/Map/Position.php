@@ -2,9 +2,12 @@
 
 namespace App\Domain\Map;
 
-class Position {
+class Position
+{
     public $x = null;
+
     public $y = null;
+
     public $z = null;
 
     public function __construct(
