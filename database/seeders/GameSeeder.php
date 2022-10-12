@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Inventory;
+use App\Models\InventoryItem;
 use App\Models\Item;
 use App\Models\MapField;
 use App\Models\MapFieldItem;
@@ -11,6 +12,7 @@ use App\Models\Player;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
+use Illuminate\Validation\Rules\In;
 
 class GameSeeder extends Seeder
 {
@@ -104,7 +106,7 @@ class GameSeeder extends Seeder
 
         // Inventories
         foreach (Player::get() as $player) {
-            Inventory::factory()->create(
+            $inventory = Inventory::factory()->create(
                 [
                     'player_id' => $player->id,
                     'key' => 'linen-bag',

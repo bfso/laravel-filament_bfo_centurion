@@ -52,6 +52,6 @@ class Interact implements ShouldQueue, ShouldBeUnique
                 function ($item) {
                     return HandleInteractionResult::handle($item, $this->command);
                 },
-            ]), $this->command->player);
+            ]), $this->command->player, $item);
     }
 }

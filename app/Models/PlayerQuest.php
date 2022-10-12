@@ -18,4 +18,14 @@ class PlayerQuest extends Pivot
         'player_id',
         'quest_id',
     ];
+
+    public function quest()
+    {
+        return $this->belongsTo(Quest::class);
+    }
+
+    public function player()
+    {
+        return $this->belongsTo(Player::class);
+    }
 }

@@ -4,29 +4,19 @@ namespace App\Domain\Quest\Actions;
 
 use App\Domain\Game\Actions\ActionResult;
 use App\Domain\Game\Actions\BaseAction;
-use App\Models\Player;
-use App\Models\Quest;
-use Illuminate\Support\Str;
+use App\Domain\Quest\Factories\QuestResolverFactory;
 
 /**
- * Class ShowAction
+ * Class ResolveQuestsAction
  * Shows the items of all inventories
  */
 class ResolveQuestsAction extends BaseAction
 {
     public function do(): ActionResult
     {
-        /** @var Player $player */
-        $player = $this
-            ->command
-            ->player;
-
-        $class = "App\Domain\Quest\Resolvers\\".Str::of($this->command->subject)->camel()->ucfirst().'QuestResolver';
-        if (class_exists($class)) {
-            $resolver = new $class;
-            $quest = Quest::where('quest', $class)->first();
-
-            return $resolver->resolve($player, $quest);
+        $resolver = (new QuestResolverFactory)($this->getSubject());
+        if($resolver){
+            return $resolver->resolve($this->getPlayer());
         }
 
         return new ActionResult(
