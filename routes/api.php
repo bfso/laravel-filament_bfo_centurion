@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CmdController;
 use App\Http\Controllers\Api\EventMessageController;
 use App\Http\Controllers\Api\InventoryController;
+use App\Http\Controllers\Api\PlayerController;
 use App\Http\Controllers\Api\QuestController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,9 @@ Route::middleware(['auth:sanctum', 'throttle:1000,1'])->group(function () {
         });
         Route::prefix('event-messages')->group(function () {
             Route::get('/', [EventMessageController::class, 'index']);
+        });
+        Route::prefix('players')->group(function () {
+            Route::get('/', [PlayerController::class, 'show']);
         });
     });
 });
