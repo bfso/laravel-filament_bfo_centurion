@@ -13,7 +13,7 @@ class CommandController extends Controller
      * @param  Command  $command
      * @return JsonResponse
      */
-    public function sendResponse(Command $command)
+    public function sendResponse(Command $command) : JsonResponse
     {
         return response()->json((ActionFactory::create($command))->do(), 200);
     }

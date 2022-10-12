@@ -4,13 +4,13 @@ namespace App\Domain\Game\Actions;
 
 class ActionResult
 {
-    public $success = false;
+    public bool $success = false;
 
-    public $message = '';
+    public string $message = '';
 
-    public $key = null;
+    public string|null $key = null;
 
-    public $data = null;
+    public array|null $data = null;
 
     public function __construct(
         $success,

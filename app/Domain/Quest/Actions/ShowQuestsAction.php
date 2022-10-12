@@ -7,8 +7,8 @@ use App\Domain\Game\Actions\BaseAction;
 use App\Models\Player;
 
 /**
- * Class ShowAction
- * Shows the items of all inventories
+ * Class ShowQuestsAction
+ * Shows all open quests of the player
  */
 class ShowQuestsAction extends BaseAction
 {

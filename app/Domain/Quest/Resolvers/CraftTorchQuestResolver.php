@@ -2,23 +2,11 @@
 
 namespace App\Domain\Quest\Resolvers;
 
-use App\Domain\Quest\Traits\Resolveable;
+use App\Domain\Quest\Contracts\QuestResolver;
 use App\Models\Inventory;
-use App\Models\Player;
-use App\Models\Quest;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 
-class CraftTorchQuestResolver
+class CraftTorchQuestResolver extends BaseQuestResolver implements QuestResolver
 {
-    use Resolveable;
-
-    protected Player|null $player = null;
-
-    protected Collection|null $data = null;
-
-    protected Quest|null $quest = null;
-
     public function title(): string
     {
         return 'Burn them!';
@@ -27,16 +15,6 @@ class CraftTorchQuestResolver
     public function description(): string
     {
         return 'Craft a torch. Torches are usually made with wax';
-    }
-
-    public function key() : string
-    {
-        $className = get_class($this);
-        $questKey = explode('\\', $className);
-        $questKey = str_replace('QuestResolver', '', $questKey);
-        $questKey = end($questKey);
-
-        return Str::kebab($questKey);
     }
 
     protected function data()
@@ -52,10 +30,7 @@ class CraftTorchQuestResolver
 
     public function isConditionMet() : bool
     {
-        if ($this->data->count() > 0) {
-            return true;
-        }
-        return false;
+        return $this->data->count() > 0;
     }
 
     protected function payQuestCost() : void
@@ -65,7 +40,7 @@ class CraftTorchQuestResolver
 
     protected function reward() : void
     {
-        $this->player->experience += $this->quest->experience;
+        $this->player->experience += $this->playerQuest->quest->experience;
         $this->player->save();
     }
 

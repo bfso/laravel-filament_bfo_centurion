@@ -18,17 +18,15 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Throwable;
 
-class Craft implements ShouldQueue, ShouldBeUnique
-{
- //
+class Craft implements ShouldQueue, ShouldBeUnique {
+    //
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     use CommandWorker;
 
-    protected function getItem(): Model
-    {
+    protected function getItem(): Model {
         return Item::with('requires')
             ->where('key', $this->command->subject)
-            ->where($this->command->action.'able', true)
+            ->where($this->command->action . 'able', true)
             ->first();
     }
 
@@ -37,26 +35,27 @@ class Craft implements ShouldQueue, ShouldBeUnique
      *
      * @throws Throwable
      */
-    public function handle()
-    {
+    public function handle() {
         $item = $this->getItem();
-
-        CraftingFinished::dispatch($this->run(
+        $actionResult = $this->run(
             $item,
             [
-                function ($item) {
+                function($item) {
                     return ItemExistsCheck::handle($item, $this->command);
                 },
-                function ($item) {
+                function($item) {
                     return LevelMismatchCheck::handle($item, $this->command);
                 },
-                function ($item) {
+                function($item) {
                     return RemoveInventoryItemsWhenAllExist::handle($item, $this->command);
                 },
-                function ($item) {
+                function($item) {
                     return CreateNewInventoryItem::handle($item, $this->command);
                 },
             ]
-        ), $this->command->player);
+        );
+
+        //(new CraftingFinished($actionResult, $this->command->player, $item))::dispatch();
+        CraftingFinished::dispatch($actionResult, $this->command->player, $item);
     }
 }

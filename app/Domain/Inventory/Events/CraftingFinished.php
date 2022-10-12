@@ -26,18 +26,18 @@ class CraftingFinished
     public Player $player;
 
     /**
-     * @var Item|null
+     * @var Item
      */
-    public Item|null $item;
+    public Item $item;
 
     /**
      * CraftingFinished constructor.
      *
      * @param ActionResult $actionResult
      * @param Player $player
-     * @param Item|null $item
+     * @param Item $item
      */
-    public function __construct(ActionResult $actionResult, Player $player, Item|null $item = null)
+    public function __construct(ActionResult $actionResult, Player $player, Item $item)
     {
         $this->actionResult = $actionResult;
         $this->player = $player;
