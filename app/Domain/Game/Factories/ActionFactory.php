@@ -14,6 +14,7 @@ use App\Domain\Inventory\Actions\DiscardAction;
 use App\Domain\Inventory\Actions\EatAction;
 use App\Domain\Inventory\Actions\ShowAction;
 use App\Domain\Map\Actions\BuildAction;
+use App\Domain\Player\Actions\ShowPlayerAction;
 use App\Domain\Quest\Actions\ResolveQuestsAction;
 use App\Domain\Quest\Actions\ShowQuestsAction;
 use App\Game\Cmd\Command;
@@ -33,6 +34,7 @@ class ActionFactory {
             'show-quests' => new ShowQuestsAction($command),
             'resolve-quests' => new ResolveQuestsAction($command),
             'show-event-messages' => new ShowEventMessagesAction($command),
+            'show-player' => new ShowPlayerAction($command),
             default => new NoAction($command),
         };
     }

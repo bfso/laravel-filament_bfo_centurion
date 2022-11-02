@@ -23,6 +23,14 @@ class Player extends Model
         'user_id',
     ];
 
+    protected $hidden = [
+        'map_field_id',
+        'mapField',
+        'created_at',
+        'updated_at',
+        'user_id',
+    ];
+
     public function mapField()
     {
         return $this->belongsTo(MapField::class);

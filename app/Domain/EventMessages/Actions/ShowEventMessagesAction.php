@@ -21,8 +21,11 @@ class ShowEventMessagesAction extends BaseAction
             ->player;
         $eventMessages = EventMessage::where('player_id', $player->id)
             ->orderBy('updated_at', 'DESC')
-            ->limit(10)
+            ->limit(20)
             ->get();
+
+        EventMessage::where('player_id', $player->id)
+            ->update(['is_read'=>true]);
 
         if ($eventMessages->count() >= 1) {
             return new ActionResult(

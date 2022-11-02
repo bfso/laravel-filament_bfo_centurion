@@ -27,7 +27,7 @@ class GameSeeder extends Seeder
         $wood = Item::factory()->create(['key' => 'wood', 'takeable' => true, 'is_seeded' => true]);
         $stick = Item::factory()->create(['key' => 'stick', 'takeable' => true, 'is_seeded' => true]);
         $stone = Item::factory()->create(['key' => 'stone', 'takeable' => true, 'is_seeded' => true]);
-        $sharpStone = Item::factory()->create(['key' => 'sharp-stone', 'takeable' => true]);
+        $sharpStone = Item::factory()->create(['key' => 'sharp-stone', 'takeable' => true, 'is_seeded' => true]);
         $spear = Item::factory()->create(['key' => 'spear', 'craftable' => true]);
         $beeHive = Item::factory()->create(['key' => 'bee-hive', 'interactable' => true, 'is_seeded' => true]);
         $wax = Item::factory()->create(['key' => 'wax', 'takeable' => true]);
