@@ -2,6 +2,7 @@
 
 namespace App\Domain\Game\Factories;
 
+use App\Domain\Blueprint\Actions\ShowBlueprintsAction;
 use App\Domain\Cmd\Actions\GoAction;
 use App\Domain\Cmd\Actions\InteractAction;
 use App\Domain\Cmd\Actions\LookAction;
@@ -35,6 +36,7 @@ class ActionFactory {
             'resolve-quests' => new ResolveQuestsAction($command),
             'show-event-messages' => new ShowEventMessagesAction($command),
             'show-player' => new ShowPlayerAction($command),
+            'show-blueprints' => new ShowBlueprintsAction($command),
             default => new NoAction($command),
         };
     }

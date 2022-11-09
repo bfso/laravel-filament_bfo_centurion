@@ -8,10 +8,10 @@ class LevelMismatchCheck
 {
     public static function handle($item, $command): ActionResult
     {
-        if ($item->level > $command->player->level) {
+        if ($item->requires_level_to_craft > $command->player->requires_level_to_craft) {
             return new ActionResult(
                 false,
-                'You need to reach level '.$item->level.' to do that.',
+                'You need to reach level '.$item->requires_level_to_craft.' to do that.',
                 'level-mismatch'
             );
         }
