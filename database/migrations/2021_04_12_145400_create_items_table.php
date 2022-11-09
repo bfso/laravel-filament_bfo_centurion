@@ -29,8 +29,9 @@ class CreateItemsTable extends Migration
             $table->boolean('interactable')->default(false);
             $table->boolean('equippable')->default(false);
             $table->boolean('is_seeded')->default(false);
-            $table->boolean('image_path')->nullable()->default(null);
-            $table->unsignedInteger('level')->default(1);
+            $table->string('image_path')->nullable()->default(null);
+            $table->unsignedInteger('requires_level_to_research')->default(0);
+            $table->unsignedInteger('requires_level_to_craft')->default(0);
             $table->unsignedInteger('claim_resistance')->default(0);
             $table->unsignedInteger('restores_health_by')->default(0);
             $table->timestamps();

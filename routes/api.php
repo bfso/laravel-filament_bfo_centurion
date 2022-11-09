@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BlueprintController;
 use App\Http\Controllers\Api\CmdController;
 use App\Http\Controllers\Api\EventMessageController;
 use App\Http\Controllers\Api\InventoryController;
@@ -43,6 +44,9 @@ Route::middleware(['auth:sanctum', 'throttle:1000,1'])->group(function () {
         });
         Route::prefix('players')->group(function () {
             Route::get('/', [PlayerController::class, 'show']);
+        });
+        Route::prefix('blueprints')->group(function () {
+            Route::get('/', [BlueprintController::class, 'show']);
         });
     });
 });

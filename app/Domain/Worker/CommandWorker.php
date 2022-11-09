@@ -23,7 +23,8 @@ trait CommandWorker
     }
 
     /**
-     * @param  array  $steps
+     * @param $item
+     * @param array $steps
      * @return ActionResult
      */
     protected function run($item, array $steps): ActionResult
