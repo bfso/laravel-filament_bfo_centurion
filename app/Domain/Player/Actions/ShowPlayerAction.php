@@ -12,12 +12,15 @@ class ShowPlayerAction extends BaseAction
 {
     public function do(): ActionResult
     {
+        /** @var Player $player */
+        $player = $this->command->player;
         return new ActionResult(
             true,
             'Player',
             'player',
             [
-                'player' => $this->command->player,
+                'player' => $player,
+                'position' => $player->mapField->position(),
             ]
         );
     }

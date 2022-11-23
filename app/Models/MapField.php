@@ -28,7 +28,7 @@ class MapField extends Model
         return $this->hasMany(Player::class);
     }
 
-    public function position()
+    public function position() : Position
     {
         return new Position(
             $this->x,
