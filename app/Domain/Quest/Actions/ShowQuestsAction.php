@@ -20,7 +20,7 @@ class ShowQuestsAction extends BaseAction
             ->player;
         $quests = ($player->with('quests')->where('id', $player->id)->first())->quests;
 
-        $quests->map(function ($quest) {
+        $quests->each(function ($quest) {
             $questResolver = new $quest->quest();
             $quest->key = $questResolver->key();
             $quest->description = $questResolver->description();

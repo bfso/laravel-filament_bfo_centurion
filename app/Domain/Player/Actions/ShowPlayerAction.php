@@ -12,6 +12,7 @@ class ShowPlayerAction extends BaseAction
 {
     public function do(): ActionResult
     {
+        /** @var Player $player */
         $player = $this->command->player;
         return new ActionResult(
             true,
