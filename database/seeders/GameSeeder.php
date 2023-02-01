@@ -33,6 +33,7 @@ class GameSeeder extends Seeder
         $wax = Item::factory()->create(['key' => 'wax', 'takeable' => true]);
         $honey = Item::factory()->create(['key' => 'honey', 'eatable' => true, 'takeable' => true, 'restores_health_by' => 5]);
         $torch = Item::factory()->create(['key' => 'torch', 'takeable' => true, 'craftable' => true]);
+        $shovel = Item::factory()->create(['key' => 'shovel', 'takeable' => true, 'craftable' => true]);
 
         // Spear blueprint
         $spear->requires()->attach($stick);
@@ -46,6 +47,10 @@ class GameSeeder extends Seeder
         // Torch blueprint
         $torch->requires()->attach($stick);
         $torch->requires()->attach($wax);
+
+        // Shovel blueprint
+        $shovel->requires()->attach($wood);
+        //$shovel->requiresTools()->attach($sharpStone);
 
         //$waypoint = Item::factory()->create(['key' => 'waypoint', 'buildable' => true, 'level' => 2]);
         //$waypoint->requires()->attach($wood);
