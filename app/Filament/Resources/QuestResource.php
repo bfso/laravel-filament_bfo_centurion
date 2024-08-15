@@ -7,9 +7,9 @@ use App\Filament\Resources\QuestResource\RelationManagers;
 use App\Models\Player;
 use App\Models\Quest;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Illuminate\Database\QueryException;
 
@@ -17,7 +17,7 @@ class QuestResource extends Resource
 {
     protected static ?string $model = Quest::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
@@ -57,7 +57,7 @@ class QuestResource extends Resource
                         }
                     })
                     ->button()
-                    ->color('secondary'),
+                    ->color('gray'),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
