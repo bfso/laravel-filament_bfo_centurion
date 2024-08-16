@@ -3,11 +3,11 @@
 namespace App\Filament\Resources\QuestResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Resources\Table;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Table;
 use Filament\Tables;
-use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\TextColumn;
 
 class PlayerRelationManager extends RelationManager
@@ -16,7 +16,7 @@ class PlayerRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    public static function form(Form $form): Form
+    public function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -26,14 +26,14 @@ class PlayerRelationManager extends RelationManager
             ]);
     }
 
-    public static function table(Table $table): Table
+    public function table(Table $table): Table
     {
         return $table
             ->columns([
                 TextColumn::make('name'),
-                BooleanColumn::make('is_started'),
-                BooleanColumn::make('is_successful'),
-                BooleanColumn::make('is_failed'),
+                IconColumn::make('is_started')->boolean(),
+                IconColumn::make('is_successful')->boolean(),
+                IconColumn::make('is_failed')->boolean(),
             ])
             ->filters([
                 //

@@ -4,9 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PersonalAccessTokenResource\Pages;
 use App\Models\User;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Laravel\Sanctum\PersonalAccessToken;
@@ -15,7 +15,7 @@ class PersonalAccessTokenResource extends Resource
 {
     protected static ?string $model = PersonalAccessToken::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function getEloquentQuery(): Builder
     {
@@ -47,7 +47,7 @@ class PersonalAccessTokenResource extends Resource
             ->filters([
                 //
             ])
-            ->appendHeaderActions([
+            ->headerActions([
                 Tables\Actions\Action::make('Generate New Token')->action(function () {
                     $token = auth()->user()->createToken(self::generateRandomString());
                 })->button()->color('primary'),
@@ -60,7 +60,7 @@ class PersonalAccessTokenResource extends Resource
             ]);
     }
 
-    private static function generateRandomString($length = 5)
+    private static function generateRandomString($length = 5) : string
     {
         return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
             ceil($length / strlen($x)))), 1, $length);
