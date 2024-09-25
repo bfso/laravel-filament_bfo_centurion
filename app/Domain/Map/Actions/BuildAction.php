@@ -4,7 +4,7 @@ namespace App\Domain\Map\Actions;
 
 use App\Domain\Game\Actions\ActionResult;
 use App\Domain\Game\Actions\BaseAction;
-use App\Jobs\Build;
+use App\Domain\Map\Jobs\Build;
 
 class BuildAction extends BaseAction
 {

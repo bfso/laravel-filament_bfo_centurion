@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Guild;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,6 +19,7 @@ class CreateMapFieldsTable extends Migration
             $table->unsignedBigInteger('x');
             $table->unsignedBigInteger('y');
             $table->bigInteger('z');
+            $table->foreignIdFor(Guild::class)->nullable();
             $table->timestamps();
         });
     }

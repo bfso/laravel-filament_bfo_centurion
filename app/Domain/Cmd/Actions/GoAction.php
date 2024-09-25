@@ -67,6 +67,11 @@ class GoAction extends BaseAction
         if (! $newMapField) {
             return $this->cantGoThereActionResult();
         }
+
+        if ($newMapField->isBlocked()) {
+            return $this->newPositionIsBlockedActionResult();
+        }
+
         $this->command->player->map_field_id = $newMapField->id;
         $this->command->player->save();
 
@@ -77,6 +82,15 @@ class GoAction extends BaseAction
             [
                 'position' => $newMapField->position(),
             ]
+        );
+    }
+
+    public function newPositionIsBlockedActionResult(): ActionResult
+    {
+        return new ActionResult(
+            false,
+            "I can't go there",
+            'new-position-is-blocked'
         );
     }
 

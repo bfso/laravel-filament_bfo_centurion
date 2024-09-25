@@ -3,7 +3,7 @@
 namespace App\Domain\Inventory\Jobs;
 
 use App\Domain\Cmd\Reactions\HandleInteractionResult;
-use App\Domain\Inventory\Events\CraftingFinished;
+use App\Domain\Inventory\Events\ClaimingFinished;
 use App\Domain\Item\Checks\ItemExistsCheck;
 use App\Domain\Item\Checks\LevelMismatchCheck;
 use App\Domain\Worker\CommandWorker;

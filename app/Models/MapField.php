@@ -28,6 +28,18 @@ class MapField extends Model
         return $this->hasMany(Player::class);
     }
 
+    public function owner()
+    {
+        return $this->belongsTo(Guild::class, 'guild_id');
+    }
+
+    public function isBlocked() : bool
+    {
+        return $this->items()
+                ->where('is_blocking', true)
+                ->exists();
+    }
+
     public function position() : Position
     {
         return new Position(

@@ -31,6 +31,11 @@ class Player extends Model
         'user_id',
     ];
 
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
+
     public function mapField()
     {
         return $this->belongsTo(MapField::class);
@@ -46,5 +51,11 @@ class Player extends Model
         return $this->belongsToMany(Quest::class)
             ->using(PlayerQuest::class)
             ->withPivot(['id', 'is_started', 'is_successful', 'is_failed']);
+    }
+
+    public function guilds()
+    {
+        return $this->belongsToMany(Guild::class)
+            ->withPivot('is_approved');
     }
 }

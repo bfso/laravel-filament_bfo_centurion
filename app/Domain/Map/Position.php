@@ -19,4 +19,13 @@ class Position
         $this->y = $y;
         $this->z = $z;
     }
+
+    public function toArray()
+    {
+        return [
+            'x' => $this->x,
+            'y' => $this->y,
+            'z' => $this->z,
+        ];
+    }
 }
