@@ -32,6 +32,8 @@ class LookAction extends BaseAction
                 'visible-on-map-field',
                 [
                     'items' => $items,
+                    'position' => $player->mapField->position(),
+                    'guild' => $player->mapField->owner,
                     'players' => $players->flatten(),
                 ]
             );

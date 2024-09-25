@@ -34,6 +34,7 @@ class GameSeeder extends Seeder
         $honey = Item::factory()->create(['key' => 'honey', 'eatable' => true, 'takeable' => true, 'restores_health_by' => 5]);
         $torch = Item::factory()->create(['key' => 'torch', 'takeable' => true, 'craftable' => true]);
         $shovel = Item::factory()->create(['key' => 'shovel', 'takeable' => true, 'craftable' => true]);
+        $rock = Item::factory()->create(['key' => 'rock', 'is_blocking' => true, 'takeable' => false, 'is_seeded' => true]);
 
         // Spear blueprint
         $spear->requires()->attach($stick);

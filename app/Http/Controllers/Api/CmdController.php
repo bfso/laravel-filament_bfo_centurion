@@ -58,4 +58,16 @@ class CmdController extends CommandController {
             )
         );
     }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function claim(Request $request): JsonResponse {
+        return $this->sendResponse(
+            new Command(
+                'claim',
+            )
+        );
+    }
 }

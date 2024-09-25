@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Domain\Game\Listeners\StoreQueuedActionFinnishMessage;
 use App\Domain\Inventory\Events\CraftingFinished;
+use App\Domain\Map\Events\ClaimingFinished;
 use App\Domain\Inventory\Listeners\ResolveCraftingQuests;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -19,6 +20,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        ClaimingFinished::class => [
+            StoreQueuedActionFinnishMessage::class,
         ],
         CraftingFinished::class => [
             StoreQueuedActionFinnishMessage::class,

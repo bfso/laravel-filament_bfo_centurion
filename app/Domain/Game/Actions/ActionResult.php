@@ -23,4 +23,33 @@ class ActionResult
         $this->key = $key;
         $this->data = $data;
     }
+
+    public static function make(string $key = '') : self
+    {
+        return new self(false, '', $key);
+    }
+
+    public function message(string $message) : self
+    {
+        $this->message = $message;
+        return $this;
+    }
+
+    public function data(array $data) : self
+    {
+        $this->data = $data;
+        return $this;
+    }
+
+    public function success() : self
+    {
+        $this->success = true;
+        return $this;
+    }
+
+    public function fail() : self
+    {
+        $this->success = false;
+        return $this;
+    }
 }

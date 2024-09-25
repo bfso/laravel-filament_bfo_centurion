@@ -29,6 +29,7 @@ class CreateItemsTable extends Migration
             $table->boolean('interactable')->default(false);
             $table->boolean('equippable')->default(false);
             $table->boolean('is_seeded')->default(false);
+            $table->boolean('is_blocking')->default(false);
             $table->string('image_path')->nullable()->default(null);
             $table->unsignedInteger('requires_level_to_research')->default(0);
             $table->unsignedInteger('requires_level_to_craft')->default(0);

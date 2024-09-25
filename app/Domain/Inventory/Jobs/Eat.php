@@ -2,7 +2,7 @@
 
 namespace App\Domain\Inventory\Jobs;
 
-use App\Domain\Inventory\Events\CraftingFinished;
+use App\Domain\Inventory\Events\ClaimingFinished;
 use App\Domain\Inventory\Reactions\IncreaseHealthByEating;
 use App\Domain\Item\Checks\ItemExistsCheck;
 
@@ -17,7 +17,7 @@ class Eat extends Craft
     {
         $item = $this->getItem();
 
-        CraftingFinished::dispatch($this->run(
+        ClaimingFinished::dispatch($this->run(
             $item,
             [
                 function ($item) {

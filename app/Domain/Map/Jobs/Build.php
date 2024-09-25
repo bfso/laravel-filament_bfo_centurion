@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Domain\Map\Jobs;
 
 use App\Events\CraftingFinished;
 use App\Game\Worker\CreateNewMapFieldItem;
 use App\Game\Worker\ItemExists;
 use App\Game\Worker\LevelMismatchCheck;
 use App\Game\Worker\RemoveInventoryItemsWhenAllExist;
+use App\Jobs\Craft;
 
 class Build extends Craft
 {

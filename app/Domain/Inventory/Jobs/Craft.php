@@ -2,7 +2,7 @@
 
 namespace App\Domain\Inventory\Jobs;
 
-use App\Domain\Inventory\Events\CraftingFinished;
+use App\Domain\Inventory\Events\ClaimingFinished;
 use App\Domain\Inventory\Reactions\CreateNewInventoryItem;
 use App\Domain\Inventory\Reactions\RemoveInventoryItemsWhenAllExist;
 use App\Domain\Item\Checks\ItemExistsCheck;
@@ -56,6 +56,6 @@ class Craft implements ShouldQueue, ShouldBeUnique {
         );
 
         //(new CraftingFinished($actionResult, $this->command->player, $item))::dispatch();
-        CraftingFinished::dispatch($actionResult, $this->command->player, $item);
+        ClaimingFinished::dispatch($actionResult, $this->command->player, $item);
     }
 }

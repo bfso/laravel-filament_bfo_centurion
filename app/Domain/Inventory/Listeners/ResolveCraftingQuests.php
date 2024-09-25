@@ -2,7 +2,7 @@
 
 namespace App\Domain\Inventory\Listeners;
 
-use App\Domain\Inventory\Events\CraftingFinished;
+use App\Domain\Inventory\Events\ClaimingFinished;
 use App\Domain\Quest\Factories\QuestResolverFactory;
 
 class ResolveCraftingQuests {
@@ -18,10 +18,10 @@ class ResolveCraftingQuests {
     /**
      * Handle the event.
      *
-     * @param CraftingFinished $craftingFinishedEvent
+     * @param ClaimingFinished $craftingFinishedEvent
      * @return void
      */
-    public function handle(CraftingFinished $craftingFinishedEvent): void {
+    public function handle(ClaimingFinished $craftingFinishedEvent): void {
         $itemKey = $craftingFinishedEvent->item->key;
         $resolver = (new QuestResolverFactory)('craft-'.$itemKey);
         $resolver?->resolve($craftingFinishedEvent->player);
