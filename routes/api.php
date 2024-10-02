@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('v1/login', [AuthController::class, 'signin']);
 //Route::post('register', [AuthController::class, 'signup']);
 
-Route::middleware(['auth:sanctum', 'throttle:1000,1'])->group(function () {
+Route::middleware(['auth:sanctum', 'throttle:9000,1'])->group(function () {
     Route::prefix('v1')->group(function () {
         Route::get('look', [CmdController::class, 'look']);
         Route::get('go', [CmdController::class, 'go']);
