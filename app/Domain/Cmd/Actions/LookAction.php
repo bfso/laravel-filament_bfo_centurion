@@ -35,6 +35,7 @@ class LookAction extends BaseAction
                     'position' => $player->mapField->position(),
                     'guild' => $player->mapField->owner,
                     'players' => $players->flatten(),
+                    'imageUrl' => env('APP_URL').'/img/32bitpixel/',
                 ]
             );
         }
